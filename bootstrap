@@ -3,7 +3,7 @@
 # bootstrap installs things.
 function bootstrapTerminal() {
 sudo -v #ask password beforehand
-	source ~/.dotfiles/installscript
+	source ~/dotfiles/installscript
 	}
 
 echo 'Bootstrap terminal'
