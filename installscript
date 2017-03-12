@@ -145,16 +145,16 @@ echo 'install ack'
 echo '------------'
 brew install ack
 
-#install some nice quicklook plugins
-echo 'install some nice quicklook plugins'
-echo '-----------------------------------'
-brew cask install --force qlcolorcode qlstephen qlmarkdown quicklook-json qlprettypatch quicklook-csv betterzipql webp-quicklook suspicious-package
-
 #install brew-cask
 echo 'install brew-cask'
 echo '------------------'
 brew tap caskroom/cask
 brew install brew-cask
+
+#install some nice quicklook plugins
+echo 'install some nice quicklook plugins'
+echo '-----------------------------------'
+brew cask install --force qlcolorcode qlstephen qlmarkdown quicklook-json qlprettypatch quicklook-csv betterzipql webp-quicklook suspicious-package
 
 #install envoy
 echo 'install laravel envoy'
