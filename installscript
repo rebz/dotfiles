@@ -1,4 +1,84 @@
 #!/bin/bash
+# https://github.com/larrybotha/designer-dotfiles
+# https://github.com/mathiasbynens/dotfiles/blob/master/.macos
+
+# Ask for the administrator password upfront
+sudo -v
+
+# Keep-alive: update existing `sudo` time stamp until `.osx` has finished
+while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+
+
+###############################################################################
+# Screen                                                                      #
+###############################################################################
+
+# Require password immediately after sleep or screen saver begins
+#defaults write com.apple.screensaver askForPassword -int 1
+#defaults write com.apple.screensaver askForPasswordDelay -int 0
+
+# Save screenshots to the desktop
+defaults write com.apple.screencapture location -string "$HOME/Desktop"
+
+# Save screenshots in PNG format (other options: BMP, GIF, JPG, PDF, TIFF)
+defaults write com.apple.screencapture type -string "png"
+
+
+
+###############################################################################
+# Finder                                                                      #
+###############################################################################
+
+# Finder: disable window animations and Get Info animations
+defaults write com.apple.finder DisableAllAnimations -bool true
+
+# Finder: show path bar
+defaults write com.apple.finder ShowPathbar -bool true
+
+# Finder: allow text selection in Quick Look
+defaults write com.apple.finder QLEnableTextSelection -bool true
+
+# Finder: show hidden files by default
+defaults write com.apple.finder AppleShowAllFiles -bool true
+
+# Finder: show all filename extensions
+defaults write NSGlobalDomain AppleShowAllExtensions -bool true
+
+# Avoid creating .DS_Store files on network volumes
+defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
+
+# Enable snap-to-grid for icons on the desktop and in other icon views
+/usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
+/usr/libexec/PlistBuddy -c "Set :FK_StandardViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
+/usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
+
+
+
+
+###############################################################################
+# Dock, Dashboard, and hot corners                                            #
+###############################################################################
+
+# Don’t animate opening applications from the Dock
+defaults write com.apple.dock launchanim -bool false
+
+# Speed up Mission Control animations
+defaults write com.apple.dock expose-animation-duration -float 0.1
+
+# Don’t automatically rearrange Spaces based on most recent use
+defaults write com.apple.dock mru-spaces -bool false
+
+# Remove the auto-hiding Dock delay
+defaults write com.apple.dock autohide-delay -float 0
+
+# Remove the animation when hiding/showing the Dock
+defaults write com.apple.dock autohide-time-modifier -float 0
+
+# Automatically hide and show the Dock
+defaults write com.apple.dock autohide -bool true
+
+
+
 
 #install zsh
 echo 'install oh-my-zhs'
@@ -13,6 +93,10 @@ git config --global core.excludesfile $HOME/.global-gitignore
 #symlink zsh prefs
 rm $HOME/.zshrc
 ln -s $HOME/.dotfiles/shell/.zshrc $HOME/.zshrc
+
+#symlink yarn prefs
+rm $HOME/.yarnrc
+ln -s $HOME/.dotfiles/shell/.yarnrc $HOME/.yarnrc
 
 #install composer
 echo 'install composer'
@@ -29,6 +113,20 @@ echo install homebrew
 sudo rm -rf /usr/local/Cellar /usr/local/.git && brew cleanup
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
+# Install GNU core utilities (those that come with OS X are outdated)
+brew install coreutils
+echo "Don’t forget to add $(brew --prefix coreutils)/libexec/gnubin to \$PATH."
+
+# Install GNU `find`, `locate`, `updatedb`, and `xargs`, g-prefixed
+brew install findutils
+
+# Install Bash 4
+brew install bash
+
+# Install native apps
+brew tap phinze/homebrew-cask
+brew install brew-cask
+
 #install wget
 echo 'install wget'
 echo '------------'
@@ -39,10 +137,31 @@ echo 'install httpie'
 echo '------------'
 brew install httpie
 
+#install speedtest_cli
+brew install speedtest_cli
+
+
+#install ncdu
+echo 'install ncdu'
+echo 'https://dev.yorhel.nl/ncdu'
+echo '------------'
+brew install ncdu
+
 #install ack
 echo 'install ack'
 echo '------------'
 brew install ack
+
+#install some nice quicklook plugins
+echo 'install some nice quicklook plugins'
+echo '-----------------------------------'
+brew cask install --force qlcolorcode qlstephen qlmarkdown quicklook-json qlprettypatch quicklook-csv betterzipql webp-quicklook suspicious-package
+
+#install brew-cask
+echo 'install brew-cask'
+echo '------------------'
+brew tap caskroom/cask
+brew install brew-cask
 
 #install envoy
 echo 'install laravel envoy'
@@ -115,6 +234,42 @@ npm install -g gulp
 echo 'install bower'
 echo '------------'
 npm install -g bower
+
+# Update brew cask symlink location
+export HOMEBREW_CASK_OPTS="--appdir=/Applications"
+
+function installcask() {
+	if brew cask info "${@}" | grep "Not installed" > /dev/null; then
+		brew cask install "${@}"
+	else
+		echo "${@} is already installed."
+	fi
+}
+
+installcask a-better-finder-rename
+installcask alfred
+installcask asepsis
+installcask betterzipql
+installcask dropbox
+installcask google-chrome
+installcask imagealpha
+installcask imageoptim
+installcask iterm2
+installcask libreoffice
+installcask quicklook-csv
+installcask quicklook-json
+installcask qlcolorcode
+installcask qlmarkdown
+installcask qlprettypatch
+installcask qlstephen
+installcask screenhero
+installcask sizzlingkeys
+installcask the-unarchiver
+installcask thunderbird
+installcask vlc
+
+# Remove outdated versions from the cellar
+brew cleanup
 
 echo '++++++++++++++++++++++++++++++'
 echo '++++++++++++++++++++++++++++++'
