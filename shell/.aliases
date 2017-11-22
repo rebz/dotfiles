@@ -1,3 +1,5 @@
+# ssh-add -K ~/.ssh/id_rsa
+
 #################################################################
 ### OS Helpers
 #################################################################
@@ -133,6 +135,7 @@ alias ghr="/usr/bin/open -a \"/Applications/Google Chrome.app\" 'http://github.c
 #################################################################
 alias sd="/usr/bin/open -a \"/Applications/Google Chrome.app\" 'https://github.com/ersel/spotify-cli-mac'"
 alias s="spotify"
+alias ss="spotify s"
 alias s+="s +"
 alias s+="s +"
 alias s-="s -"
