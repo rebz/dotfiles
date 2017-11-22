@@ -128,6 +128,17 @@ alias sass="npm rebuild node-sass"
 alias ghr="/usr/bin/open -a \"/Applications/Google Chrome.app\" 'http://github.com/rebz'"
 
 
+#################################################################
+### Spotify CLI
+#################################################################
+alias sd="/usr/bin/open -a \"/Applications/Google Chrome.app\" 'https://github.com/ersel/spotify-cli-mac'"
+alias s="spotify"
+alias s+="s +"
+alias s+="s +"
+alias s-="s -"
+alias so="s o"
+
+
 # bindkey  "^[[H"   beginning-of-line
 # bindkey  "^[[F"   end-of-line
 
