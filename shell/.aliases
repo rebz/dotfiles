@@ -1,80 +1,148 @@
-ssh-add -K ~/.ssh/id_rsa
+#################################################################
+### OS Helpers
+#################################################################
 
-bindkey  "^[[H"   beginning-of-line
-bindkey  "^[[F"   end-of-line
+# alias rf="rm -rf"
+# alias hosts="sudo vi /etc/hosts"
 
-export PATH=~/.config/composer/vendor/bin:$PATH
-export PATH=~/.config/composer/vendor/bin:~/.composer/vendor/bin:$PATH
+# List all files colorized in long format
+alias l="ls -laF"
 
-# Easier navigation
+# Show/hide hidden files in Finder
+alias show="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
+alias hide="defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"
+
+# Show the lock screen
+alias afk="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
+
+### Navigation
+alias finder="open ."
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
 
-# Host file
-# alias hostfile="sudo vi /etc/hosts"
+### Network
+alias flushdns="sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder"
 
-# Homestead Helpers
-# alias homestead='function __homestead() { (cd ~/Homestead && vagrant $*); unset -f __homestead; }; __homestead'
+alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
+alias localip="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[0-9]\+\)\|[a-fA-F0-9:]\+\)' | awk '{ sub(/inet6? (addr:)? ?/, \"\"); print }'"
+
+
+#################################################################
+### GIT Helpers
+#################################################################
+
+alias gst="git status"
+alias pop="git stash pop"
+alias switch="git checkout"
+alias pull="git pull origin"
+alias amend="git commit --amend"
+alias nah="git reset --hard HEAD"
+alias clean="git clean -f"
+alias stash="git stash --include-untracked"
+alias ignore="git update-index --assume-unchanged"
+alias gl="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+
+
+#################################################################
+### Composer
+#################################################################
+
+alias outdated="composer outdated"
+alias check='php ~/.composer/vendor/sensiolabs/security-checker/./security-checker security:check composer.lock'
+
+
+#################################################################
+### Laravel Helpers
+#################################################################
+
+alias art="php artisan"
+alias fresh="php artisan migrate:fresh --seed"
+
+
+#### Valet
+# Share with ngrok
+alias share="valet share"
+
+
+#### Testing
+alias dusk="php artisan dusk"
+alias t="./vendor/bin/phpunit"
+alias tf="./vendor/bin/phpunit --filter"
+
+#### Webpack
+alias dev="npm run dev"
+alias live="npm run hmr"
+alias watch="npm run watch"
+alias pretty="npm run pretty"
+alias prod="npm run production"
+
+#### Workers
+alias retry="php artisan queue:retry all"
+alias work="php artisan queue:work --tries=1"
+
+### Horizon
+alias workers="php artisan horizon"
+alias stopWorkers="php artisan horizon:terminate"
+alias restartWorkers="stopWorkers && workers"
+alias pauseWorkers="php artisan horizon:pause"
+alias continue="php artisan horizon:continue"
+
+#### Homestead
 # alias vm="ssh vagrant@127.0.0.1 -p 2222"
+# alias homestead='function __homestead() { (cd ~/Homestead && vagrant $*); unset -f __homestead; }; __homestead'
 
-# Laravel Helpers
-# alias ut="./vendor/bin/phpunit"
-# alias dev="npm run dev"
-# alias watch="npm run watch"
-# alias live="npm run hmr"
-# alias prod="npm run production"
+#### LaRoute Generator
+alias routes="php artisan laroute:generate"
 
-# alias work="php artisan queue:work --tries=1"
-# alias retry="php artisan queue:retry all"
 
-# alias routes="php artisan laroute:generate"
+#################################################################
+### Release IT - https://webpro.github.io/release-it
+#################################################################
 
-# Valet Helpers
-# alias share="valet share"
+# alias release="release-it"
 
-# GIT
-# alias nah="git reset --hard HEAD"
-# alias switch="git checkout"
-# alias pull="git pull origin"
 
-function pushme {
-    br=`git branch | grep "*"`
+#################################################################
+### Random
+#################################################################
 
-    params=''
-    for i in $*;
-    do
-        params=" $params $i"
-    done
+# Brew Helpers
+# alias rmbrew="brew list | xargs brew rm"
 
-    git add --all
-    git commit -m "$params"
-    git push origin ${br/* /}
-}
 
-# Show/hide hidden files in Finder
-# alias show="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
-# alias hide="defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"
+#################################################################
+### Designer / Front-End
+#################################################################
 
-# IP addresses
-# alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
-# alias localip="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[0-9]\+\)\|[a-fA-F0-9:]\+\)' | awk '{ sub(/inet6? (addr:)? ?/, \"\"); print }'"
+# Fix Node Sass
+alias sass="npm rebuild node-sass"
 
-# Enable aliases to be sudo’ed
-# alias sudo='sudo '
 
-# Lock the screen
-# alias afk="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
+#################################################################
+### Personal
+#################################################################
 
-# Flush Directory Service cache
-# alias flushdns="sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder"
+# Open github.com/rebz
+alias ghr="/usr/bin/open -a \"/Applications/Google Chrome.app\" 'http://github.com/rebz'"
 
-# List all files colorized in long format
-# alias l="ls -laF"
 
-# Remove folders
-# alias rf="rm -rf"
+# bindkey  "^[[H"   beginning-of-line
+# bindkey  "^[[F"   end-of-line
 
-# MYSQL
-# alias mysqladm='mysql -u root'
+# function pushme {
+#     br=`git branch | grep "*"`
+#
+#     params=''
+#     for i in $*;
+#     do
+#         params=" $params $i"
+#     done
+#
+#     git add --all
+#     git commit -m "$params"
+#     git push origin ${br/* /}
+# }
+
+# /usr/bin/open -a "/Applications/Google Chrome.app" 'http://google.com/'
