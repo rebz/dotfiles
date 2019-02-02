@@ -1,11 +1,24 @@
-dotfiles
-========
+# Installation
 
-You can install them by cloning the repository as '.dotfiles' in your home directory and running the bootstrap-script.
+`git clone git@github.com:rebz/dotfiles.git ~/.dotfiles`
 
-The bootstrap script can be run be cd-ing into the .dotfiles directory and performing this command:
-```bash
-./bootstrap
-```
+`~/.dotfiles/bootstrap`
 
+# Programs
+
+- Homebrew
+- PHP 7.1
+    - Composer
+- Redis
+- Mongo
+- MySQL 7
+- NVM
+- Yarn
+- Laravel Valet
+- ZSH
+    - Auto Suggestions
+    - Spaceship Theme
+    - Spaceship Prompt
+        - fonts
+    
 #### Credits to https://github.com/freekmurze/dotfiles
