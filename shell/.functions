@@ -1,6 +1,21 @@
+#################################################################
+### OS
+#################################################################
+
+# Create a new directory and enter it
+function mkd() {
+	mkdir -p "$@" && cd "$@"
+}
+
 archive () {
    zip -r "$1".zip -i "$1" ;
 }
+
+
+
+#################################################################
+### MySQL
+#################################################################
 
 function db {
     if [ "$1" = "refresh" ]; then
@@ -12,6 +27,118 @@ function db {
          echo "drop database $2;" | mysql -u root
     fi
 }
+
+
+
+#################################################################
+### GIT
+#################################################################
+
+# Pushes all the code up in the current directory
+function pushme {
+
+    branch=`git branch | grep "*"`
+
+    params=''
+
+    for i in $*;
+    do
+        params=" $params $i"
+    done
+
+    params=$(echo $params | sed 's,^ *,,; s, *$,,')
+
+    git add --all
+    git commit -m "$params"
+    git push origin ${branch/* /}
+}
+
+rebase() {
+    if [ $1 ]
+        then
+            git pull origin $1 --rebase
+        else
+            echo "Missing branch to rebase from"
+    fi
+}
+
+commit() {
+
+    echo What JIRA issue are you working on?
+    read issue
+
+    echo What did you work on?
+    read message
+
+    if [ ! -z "$issue" ]
+    then
+        issue="$issue : "
+    fi
+
+    branch=`git branch | grep "*"`
+
+    git add --all
+    git commit -m "$issue$message"
+    git push origin ${branch/* /}
+}
+
+deleteBranches() {
+    git branch --merged origin/develop | grep -v master | grep -v develop | grep -v dev | xargs git branch -d
+}
+
+
+
+#################################################################
+### NVM
+#################################################################
+
+nvmset() {
+    echo "$1" > .nvmrc
+}
+
+nvmdefault() {
+    nvm alias default $1
+}
+
+port() {
+    if [ $1 ]
+    then
+        sudo -v;
+        echo PIDs:
+        sudo lsof -i tcp:$1 | grep -v "Google"
+        echo "\n"
+        echo Listeners:
+        sudo netstat -vanp tcp | grep $1
+    else
+        echo Must supply a port.
+    fi
+}
+
+kport() {
+    if [ $1 ]
+    then
+        sudo -v;
+        pidsFound=($(sudo lsof -i tcp:$1 | grep -v "Google" | awk 'NR>1{ print $2 }' | sort -u))
+        if (( ${#pidsFound[@]} ))
+        then
+            for pid in "${pidsFound[@]}"
+            do
+                echo Killing $pid
+                sudo echo $pidsFound | xargs kill -9
+            done
+        else
+            echo Did not find anything running on $1
+        fi
+    else
+        echo Must supply a port.
+    fi
+}
+
+
+
+#################################################################
+### Other
+#################################################################
 
 xdebug() {
    iniFileLocation="/usr/local/etc/php/7.1/conf.d/ext-xdebug.ini";

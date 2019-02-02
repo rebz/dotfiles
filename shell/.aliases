@@ -4,8 +4,8 @@
 ### OS Helpers
 #################################################################
 
-# alias rf="rm -rf"
-# alias hosts="sudo vi /etc/hosts"
+alias rf="rm -rf"
+alias hosts="sudo vi /etc/hosts"
 
 # List all files colorized in long format
 alias l="ls -laF"
@@ -15,7 +15,8 @@ alias show="defaults write com.apple.finder AppleShowAllFiles -bool true && kill
 alias hide="defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"
 
 # Show the lock screen
-alias afk="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
+# alias afk="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
+alias afk='osascript -e "tell application "\""Finder"\"" to sleep"'
 
 ### Navigation
 alias finder="open ."
@@ -29,6 +30,7 @@ alias flushdns="sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder"
 
 alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
 alias localip="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[0-9]\+\)\|[a-fA-F0-9:]\+\)' | awk '{ sub(/inet6? (addr:)? ?/, \"\"); print }'"
+
 
 
 #################################################################
@@ -47,12 +49,14 @@ alias ignore="git update-index --assume-unchanged"
 alias gl="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 
 
+
 #################################################################
 ### Composer
 #################################################################
 
 alias outdated="composer outdated"
 alias check='php ~/.composer/vendor/sensiolabs/security-checker/./security-checker security:check composer.lock'
+
 
 
 #################################################################
@@ -62,34 +66,26 @@ alias check='php ~/.composer/vendor/sensiolabs/security-checker/./security-check
 alias art="php artisan"
 alias fresh="php artisan migrate:fresh --seed"
 
-
 #### Valet
 # Share with ngrok
 alias share="valet share"
-
 
 #### Testing
 alias dusk="php artisan dusk"
 alias t="./vendor/bin/phpunit"
 alias tf="./vendor/bin/phpunit --filter"
+alias j="npm run test"
+alias jf="npm run test -- -t"
 
 #### Webpack
 alias dev="npm run dev"
-alias live="npm run hmr"
+alias hot="npm run hot"
 alias watch="npm run watch"
-alias pretty="npm run pretty"
 alias prod="npm run production"
 
 #### Workers
 alias retry="php artisan queue:retry all"
 alias work="php artisan queue:work --tries=1"
-
-### Horizon
-alias workers="php artisan horizon"
-alias stopWorkers="php artisan horizon:terminate"
-alias restartWorkers="stopWorkers && workers"
-alias pauseWorkers="php artisan horizon:pause"
-alias continue="php artisan horizon:continue"
 
 #### Homestead
 # alias vm="ssh vagrant@127.0.0.1 -p 2222"
@@ -106,12 +102,14 @@ alias routes="php artisan laroute:generate"
 # alias release="release-it"
 
 
+
 #################################################################
 ### Random
 #################################################################
 
 # Brew Helpers
 # alias rmbrew="brew list | xargs brew rm"
+
 
 
 #################################################################
@@ -122,6 +120,7 @@ alias routes="php artisan laroute:generate"
 alias sass="npm rebuild node-sass"
 
 
+
 #################################################################
 ### Personal
 #################################################################
@@ -130,35 +129,3 @@ alias sass="npm rebuild node-sass"
 alias ghr="/usr/bin/open -a \"/Applications/Google Chrome.app\" 'http://github.com/rebz'"
 alias jira="/usr/bin/open -a \"/Applications/Google Chrome.app\" 'https://forcecats.atlassian.net/secure/RapidBoard.jspa?rapidView=34'"
 alias conf="/usr/bin/open -a \"/Applications/Google Chrome.app\" 'https://forcecats.atlassian.net/wiki/spaces/~cjohnson/pages'"
-
-
-#################################################################
-### Spotify CLI
-#################################################################
-alias sd="/usr/bin/open -a \"/Applications/Google Chrome.app\" 'https://github.com/ersel/spotify-cli-mac'"
-alias s="spotify"
-alias ss="spotify s"
-alias s+="s +"
-alias s+="s +"
-alias s-="s -"
-alias so="s o"
-
-
-# bindkey  "^[[H"   beginning-of-line
-# bindkey  "^[[F"   end-of-line
-
-# function pushme {
-#     br=`git branch | grep "*"`
-#
-#     params=''
-#     for i in $*;
-#     do
-#         params=" $params $i"
-#     done
-#
-#     git add --all
-#     git commit -m "$params"
-#     git push origin ${br/* /}
-# }
-
-# /usr/bin/open -a "/Applications/Google Chrome.app" 'http://google.com/'
