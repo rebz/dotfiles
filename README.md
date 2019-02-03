@@ -31,5 +31,7 @@
 # Credits 
 - Original dotfiles from: https://github.com/freekmurze/dotfiles
 - Ideas taken from: https://github.com/lukepolo/dotfiles 
-- Guides used to help:
+- Sites/Guides/Issues used to help make this:
+    - https://github.com/Homebrew/homebrew-core/issues/25974
+    - https://github.com/Homebrew/homebrew-core/issues/28102
     - https://getgrav.org/blog/macos-mojave-apache-multiple-php-versions
