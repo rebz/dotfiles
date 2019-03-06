@@ -183,6 +183,9 @@ sudo brew services start httpd
 ### PHP
 #################################################################
 
+# TODO - install 71, 72, 73... cleanup install scripts below... then use phpv() to use latest php version
+# TODO - think about DB versions... is it possible to switch between those with ease?
+
 echo 'install, start, link php 7.1'
 echo '------------'
 brew install php71
