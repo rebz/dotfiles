@@ -87,21 +87,28 @@ xcode-select --install
 
 
 #################################################################
+### Mac OS Mojave Required Libraries for below
+#################################################################
+
+echo 'install Mojave missing libraries'
+echo '-----------------'
+brew install openldap libiconv
+
+
+
+#################################################################
 ### GIT
 #################################################################
 
 # global gitigore
-echo 'git - link global gitignore'
 ln -s $HOME/.dotfiles/shell/.gitignore_global $HOME/.gitignore_global
-echo 'git - setup gitconfig'
 ln -s $HOME/.dotfiles/shell/.gitconfig $HOME/.gitconfig
-git config --global core.excludesfile $HOME/.gitignore_global
+git config --global core.excludesfile $HOME/.global-gitignore
 clear
 
 # global git config setup
 git config --global core.autocrlf true
-# git config --global core.excludesfile $HOME/.gitignore_global
-echo '-----------------'
+# git config --global core.excludesfile $HOME/.global-gitignore
 
 
 
@@ -150,16 +157,6 @@ echo 'Install brew-cask'
 echo '-----------------'
 brew tap caskroom/cask
 brew install brew-cask
-
-
-
-#################################################################
-### Mac OS Mojave Required Libraries for below
-#################################################################
-
-echo 'install Mojave missing libraries'
-echo '-----------------'
-brew install openldap libiconv
 
 
 
@@ -219,6 +216,8 @@ brew install php71-mongodb
 # echo 'Install xdebug'
 # echo '--------------'
 # pecl install xdebug
+
+
 
 
 
