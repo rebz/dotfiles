@@ -1,19 +1,24 @@
 #################################################################
-### SSH Keys
+### SSH Key
 #################################################################
 
-ssh-add -K ~/.ssh/esreborn-Bitbucket
-ssh-add -K ~/.ssh/force_cjohnson-Bitbucket
-ssh-add -K ~/.ssh/rebz-GitHub
+#import ssh keys in keychain
+ssh-add -A 2>/dev/null
+ssh-add -K ~/.ssh/id_rsa 2>/dev/null
+
 
 
 #################################################################
-### ZSH Settings
+### NativeScript Build
 #################################################################
 
 export LANG=en_US.UTF-8
 export SWIFT_VERSION=4
 
+
+#################################################################
+### ZSH Settings
+#################################################################
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
 
@@ -72,16 +77,6 @@ unset file
 
 
 #################################################################
-### SSH Key
-#################################################################
-
-#import ssh keys in keychain
-ssh-add -A 2>/dev/null
-ssh-add -K ~/.ssh/id_rsa 2>/dev/null
-
-
-
-#################################################################
 ### PATHS
 #################################################################
 
@@ -122,9 +117,3 @@ export NVM_DIR="$HOME/.nvm"
 export PATH="/usr/local/opt/mysql@5.7/bin:$PATH"
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-
-###-tns-completion-start-###
-if [ -f /Users/christopherjohnson/.tnsrc ]; then 
-    source /Users/christopherjohnson/.tnsrc 
-fi
-###-tns-completion-end-###

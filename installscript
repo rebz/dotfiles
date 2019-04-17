@@ -121,15 +121,15 @@ echo 'install oh-my-zhs'
 echo '-----------------'
 rm -rf $HOME/.oh-my-zsh
 curl -L http://install.ohmyz.sh | sh
-git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions
-git clone https://github.com/denysdovhan/spaceship-prompt.git "$ZSH_CUSTOM/themes/spaceship-prompt"
+sudo git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions
+sudo git clone https://github.com/denysdovhan/spaceship-prompt.git "$ZSH_CUSTOM/themes/spaceship-prompt"
 
 # symlink zsh prefs
 rm $HOME/.zshrc
 ln -s $HOME/.dotfiles/shell/.zshrc $HOME/.zshrc
 
 # copy spaceship theme over
-ln -s "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" "$ZSH_CUSTOM/themes/spaceship.zsh-theme" # TODO - this does not appear to copy over
+sudo ln -s "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" "$ZSH_CUSTOM/themes/spaceship.zsh-theme" # TODO - this does not appear to copy over
 
 
 
@@ -179,6 +179,9 @@ sudo brew services start httpd
 #################################################################
 ### PHP
 #################################################################
+
+# TODO - install 71, 72, 73... cleanup install scripts below... then use phpv() to use latest php version
+# TODO - think about DB versions... is it possible to switch between those with ease?
 
 echo 'install, start, link php 7.1'
 echo '------------'
@@ -324,8 +327,8 @@ brew install yarn
 ### Other
 #################################################################
 
-# install some nice quicklook plugins
-echo 'install some nice quicklook plugins'
+# install finder quicklook plugins
+echo 'install finder quicklook plugins'
 echo '-----------------------------------'
 brew cask install --force qlcolorcode qlstephen qlmarkdown quicklook-json qlprettypatch quicklook-csv betterzipql webp-quicklook suspicious-package
 
@@ -335,7 +338,7 @@ echo '------------'
 brew install dos2unix
 
 #install file watch (needed for watching phpunit tests)
-echo 'install onchange'
+echo 'install onchange for phpunit tests'
 echo '----------------'
 npm install -g onchange
 

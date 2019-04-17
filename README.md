@@ -22,7 +22,6 @@
         - fonts
 
 # Things to do/fix
-- global gitignore not copying over
 - spaceship theme not working
 - load Fire Code fonts
 - switch php version-specific plugins to global install

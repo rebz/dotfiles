@@ -122,10 +122,16 @@ alias sass="npm rebuild node-sass"
 
 
 #################################################################
+### Typescript / Node
+#################################################################
+
+alias ts="ts-node"
+
+
+
+#################################################################
 ### Personal
 #################################################################
 
 # Open github.com/rebz
 alias ghr="/usr/bin/open -a \"/Applications/Google Chrome.app\" 'http://github.com/rebz'"
-alias jira="/usr/bin/open -a \"/Applications/Google Chrome.app\" 'https://forcecats.atlassian.net/secure/RapidBoard.jspa?rapidView=34'"
-alias conf="/usr/bin/open -a \"/Applications/Google Chrome.app\" 'https://forcecats.atlassian.net/wiki/spaces/~cjohnson/pages'"
