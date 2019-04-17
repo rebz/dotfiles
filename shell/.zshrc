@@ -3,8 +3,8 @@
 #################################################################
 
 #import ssh keys in keychain
-ssh-add -A 2>/dev/null
-ssh-add -K ~/.ssh/id_rsa 2>/dev/null
+ssh-add -K ~/.ssh/esreborn-Bitbucket 2>/dev/null
+ssh-add -K ~/.ssh/force_cjohnson-Bitbucket 2>/dev/null
 
 
 
@@ -44,7 +44,7 @@ DEFAULT_USER=`whoami`
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(git zsh-nvm laravel5 composer vagrant)
 
-source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+#source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 
 
