@@ -1,3 +1,19 @@
+#################################################################
+### SSH Keys
+#################################################################
+
+ssh-add -K ~/.ssh/esreborn-Bitbucket
+ssh-add -K ~/.ssh/force_cjohnson-Bitbucket
+ssh-add -K ~/.ssh/rebz-GitHub
+
+
+#################################################################
+### ZSH Settings
+#################################################################
+
+export LANG=en_US.UTF-8
+export SWIFT_VERSION=4
+
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
 
@@ -73,6 +89,8 @@ PATH="/usr/local/bin:$PATH"
 PATH="/usr/local/sbin:$PATH"
 PATH="$PATH:$HOME/.composer/vendor/bin"
 
+export ANDROID_HOME=/usr/local/share/android-sdk
+
 
 
 #################################################################
@@ -104,3 +122,9 @@ export NVM_DIR="$HOME/.nvm"
 export PATH="/usr/local/opt/mysql@5.7/bin:$PATH"
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+
+###-tns-completion-start-###
+if [ -f /Users/christopherjohnson/.tnsrc ]; then 
+    source /Users/christopherjohnson/.tnsrc 
+fi
+###-tns-completion-end-###
