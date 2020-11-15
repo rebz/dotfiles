@@ -62,11 +62,9 @@ alias check='php ~/.composer/vendor/sensiolabs/security-checker/./security-check
 alias art="php artisan"
 alias fresh="php artisan migrate:fresh --seed"
 
-
 #### Valet
 # Share with ngrok
 alias share="valet share"
-
 
 #### Testing
 alias dusk="php artisan dusk"
@@ -81,6 +79,7 @@ alias pretty="npm run pretty"
 alias prod="npm run production"
 
 #### Workers
+alias srun="while true; do php artisan schedule:run; sleep 60; done;"
 alias retry="php artisan queue:retry all"
 alias work="php artisan queue:work --tries=1"
 
@@ -130,6 +129,9 @@ alias sass="npm rebuild node-sass"
 alias ghr="/usr/bin/open -a \"/Applications/Google Chrome.app\" 'http://github.com/rebz'"
 alias jira="/usr/bin/open -a \"/Applications/Google Chrome.app\" 'https://forcecats.atlassian.net/secure/RapidBoard.jspa?rapidView=34'"
 alias conf="/usr/bin/open -a \"/Applications/Google Chrome.app\" 'https://forcecats.atlassian.net/wiki/spaces/~cjohnson/pages'"
+
+# Export CSV of current
+alias glog="git log --date=iso --pretty=format:'"%h","%an","%ad","%s"' > log.csv"
 
 
 #################################################################
