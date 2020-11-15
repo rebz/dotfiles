@@ -1,11 +1,37 @@
-dotfiles
-========
+# Installation
 
-You can install them by cloning the repository as '.dotfiles' in your home directory and running the bootstrap-script.
+`git clone git@github.com:rebz/dotfiles.git ~/.dotfiles`
 
-The bootstrap script can be run be cd-ing into the .dotfiles directory and performing this command:
-```bash
-./bootstrap
-```
+`~/.dotfiles/bootstrap`
 
-#### Credits to https://github.com/freekmurze/dotfiles
+# Programs
+
+- Homebrew
+- PHP 7.1
+    - Composer
+- Redis
+- Mongo
+- MySQL 7
+- NVM
+- Yarn
+- Laravel Valet
+- ZSH
+    - Auto Suggestions
+    - Spaceship Theme
+    - Spaceship Prompt
+        - fonts
+
+# Things to do/fix
+- spaceship theme not working
+- load Fire Code fonts
+- switch php version-specific plugins to global install
+- create php version switcher function
+
+
+# Credits 
+- Original dotfiles from: https://github.com/freekmurze/dotfiles
+- Ideas taken from: https://github.com/lukepolo/dotfiles 
+- Sites/Guides/Issues used to help make this:
+    - https://github.com/Homebrew/homebrew-core/issues/25974
+    - https://github.com/Homebrew/homebrew-core/issues/28102
+    - https://getgrav.org/blog/macos-mojave-apache-multiple-php-versions
