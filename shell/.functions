@@ -18,16 +18,16 @@ archive () {
 ### MySQL
 #################################################################
 
-function db {
-    if [ "$1" = "refresh" ]; then
-        echo "drop database $2;" | mysql -u root
-        echo "create database $2;" | mysql -u root
-    elif [ "$1" = "create" ]; then
-        echo "create database $2;" | mysql -u root
-    elif [ "$1" = "drop" ]; then
-         echo "drop database $2;" | mysql -u root
-    fi
-}
+# function db {
+#     if [ "$1" = "refresh" ]; then
+#         echo "drop database $2;" | mysql -u root
+#         echo "create database $2;" | mysql -u root
+#     elif [ "$1" = "create" ]; then
+#         echo "create database $2;" | mysql -u root
+#     elif [ "$1" = "drop" ]; then
+#          echo "drop database $2;" | mysql -u root
+#     fi
+# }
 
 
 
@@ -155,35 +155,3 @@ xdebug() {
       echo "xdebug is now inactive";
    fi
 }
-
-<<<<<<< HEAD
-=======
-
-
-#################################################################
-### PHP Versions
-#################################################################
-
->>>>>>> 200abebd27375bc92b7e608cbd693639a8df161a
-phpv() {
-    valet stop
-
-    brew services stop php@7.1
-    brew services stop php@7.2
-    brew services stop php@7.3
-
-    brew unlink php@7.1 php@7.2 php@7.3
-    brew link --force --overwrite $1
-
-    brew services start $1
-    composer global update
-    valet install
-}
-
-alias php71="phpv php@7.1"
-alias php72="phpv php@7.2"
-<<<<<<< HEAD
-alias php73="phpv php@7.3"
-=======
-alias php73="phpv php@7.3"
->>>>>>> 200abebd27375bc92b7e608cbd693639a8df161a

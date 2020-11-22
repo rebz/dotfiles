@@ -134,16 +134,6 @@ sudo ln -s "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" "$ZSH_CUSTO
 
 
 #################################################################
-### WGET
-#################################################################
-
-echo 'install wget'
-echo '------------'
-brew install wget --overwrite
-
-
-
-#################################################################
 ### Homebrew
 #################################################################
 
@@ -157,140 +147,6 @@ echo 'Install brew-cask'
 echo '-----------------'
 brew tap caskroom/cask
 brew install brew-cask
-
-
-
-#################################################################
-### Remove Mac Mojave Apache Install + Re-install
-#################################################################
-
-echo 'stop Mac Mojave apache, uninstall'
-echo '------------'
-sudo apachectl stop
-sudo launchctl unload -w /System/Library/LaunchDaemons/org.apache.httpd.plist 2>/dev/null
-
-echo 'install httpd'
-echo '------------'
-brew install httpd
-sudo brew services start httpd
-
-
-
-#################################################################
-### PHP
-#################################################################
-
-# TODO - install 71, 72, 73... cleanup install scripts below... then use phpv() to use latest php version
-# TODO - think about DB versions... is it possible to switch between those with ease?
-
-echo 'install, start, link php 7.1'
-echo '------------'
-brew install php71
-brew install php71-xdebug
-sudo brew services start homebrew/php/php71
-brew link --force --overwrite php@7.1 # todo - link php
-
-# switch between installs
-# `brew unlink php@7.3 && brew link --force --overwrite php@5.6`
-
-# edit ini files
-# /usr/local/etc/php/5.6/php.ini
-# /usr/local/etc/php/7.0/php.ini
-# /usr/local/etc/php/7.1/php.ini
-# /usr/local/etc/php/7.2/php.ini
-# /usr/local/etc/php/7.3/php.ini
-
-echo 'install php 7.1 mcrypt'
-echo '------------'
-brew install homebrew/php/php71-mcrypt
-
-echo 'install php 7.1 imagick'
-echo '------------'
-brew install homebrew/php/php71-imagick
-
-echo 'install php 7.1 mongodb'
-echo '------------'
-brew install php71-mongodb
-
-# brew install php@7.2
-# echo 'Install xdebug'
-# echo '--------------'
-# pecl install xdebug
-
-
-
-
-
-#################################################################
-### Composer
-#################################################################
-
-echo 'install composer'
-echo '----------------'
-cd ~/.dotfiles
-brew install composer
-
-
-
-#################################################################
-### Redis
-#################################################################
-
-echo 'install redis'
-echo '------------'
-brew install redis
-brew install --HEAD homebrew/php/php71-redis
-sudo brew services start redis
-
-
-
-#################################################################
-### Server Stuff for Valet
-#################################################################
-
-echo 'install dnsmasq'
-echo '------------'
-brew install dnsmasq
-sudo brew services start dnsmasq
-
-echo 'install nginx'
-echo '------------'
-brew install nginx
-sudo brew services start nginx
-
-
-
-#################################################################
-### Valet
-#################################################################
-
-echo 'install laravel valet'
-echo '---------------------'
-composer global require laravel/valet
-valet install
-
-
-
-#################################################################
-### MySQL
-#################################################################
-
-echo 'install mysql'
-echo '---------------'
-brew install mysql
-brew services start mysql
-
-
-
-#################################################################
-### Mongo
-#################################################################
-
-echo 'install mongo'
-echo '---------------'
-brew install mongo
-brew services start mongodb
-
 
 
 #################################################################
@@ -312,14 +168,9 @@ echo 'install NVM'
 echo '...then `nvm install 10.15.0`'
 echo '...then install zsh nvm plugin'
 echo '---------------'
-curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
-nvm install 10.15.0
+curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.37.0/install.sh | bash
+nvm install 14.15.1
 git clone https://github.com/lukechilds/zsh-nvm ~/.oh-my-zsh/custom/plugins/zsh-nvm
-
-# install yarn
-echo 'install yarn'
-echo '------------'
-brew install yarn
 
 
 
@@ -336,11 +187,6 @@ brew cask install --force qlcolorcode qlstephen qlmarkdown quicklook-json qlpret
 echo 'install dos2unix'
 echo '------------'
 brew install dos2unix
-
-#install file watch (needed for watching phpunit tests)
-echo 'install onchange for phpunit tests'
-echo '----------------'
-npm install -g onchange
 
 
 

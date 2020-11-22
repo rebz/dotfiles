@@ -54,8 +54,8 @@ alias gl="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %
 ### Composer
 #################################################################
 
-alias outdated="composer outdated"
-alias check='php ~/.composer/vendor/sensiolabs/security-checker/./security-checker security:check composer.lock'
+# alias outdated="composer outdated"
+# alias check='php ~/.composer/vendor/sensiolabs/security-checker/./security-checker security:check composer.lock'
 
 
 
@@ -63,37 +63,37 @@ alias check='php ~/.composer/vendor/sensiolabs/security-checker/./security-check
 ### Laravel Helpers
 #################################################################
 
-alias art="php artisan"
-alias fresh="php artisan migrate:fresh --seed"
+# alias art="php artisan"
+# alias fresh="php artisan migrate:fresh --seed"
 
 #### Valet
 # Share with ngrok
-alias share="valet share"
+# alias share="valet share"
 
 #### Testing
-alias dusk="php artisan dusk"
-alias t="./vendor/bin/phpunit"
-alias tf="./vendor/bin/phpunit --filter"
-alias j="npm run test"
-alias jf="npm run test -- -t"
+# alias dusk="php artisan dusk"
+# alias t="./vendor/bin/phpunit"
+# alias tf="./vendor/bin/phpunit --filter"
+# alias j="npm run test"
+# alias jf="npm run test -- -t"
 
 #### Webpack
-alias dev="npm run dev"
-alias hot="npm run hot"
-alias watch="npm run watch"
-alias prod="npm run production"
+# alias dev="npm run dev"
+# alias hot="npm run hot"
+# alias watch="npm run watch"
+# alias prod="npm run production"
 
 #### Workers
-alias srun="while true; do php artisan schedule:run; sleep 60; done;"
-alias retry="php artisan queue:retry all"
-alias work="php artisan queue:work --tries=1"
+# alias srun="while true; do php artisan schedule:run; sleep 60; done;"
+# alias retry="php artisan queue:retry all"
+# alias work="php artisan queue:work --tries=1"
 
 #### Homestead
 # alias vm="ssh vagrant@127.0.0.1 -p 2222"
 # alias homestead='function __homestead() { (cd ~/Homestead && vagrant $*); unset -f __homestead; }; __homestead'
 
 #### LaRoute Generator
-alias routes="php artisan laroute:generate"
+# alias routes="php artisan laroute:generate"
 
 
 #################################################################
@@ -111,31 +111,5 @@ alias routes="php artisan laroute:generate"
 # Brew Helpers
 # alias rmbrew="brew list | xargs brew rm"
 
-
-
-#################################################################
-### Designer / Front-End
-#################################################################
-
-# Fix Node Sass
-alias sass="npm rebuild node-sass"
-
-
-
-#################################################################
-### Typescript / Node
-#################################################################
-
-alias ts="ts-node"
-
-
 # Export CSV of current
 alias glog="git log --date=iso --pretty=format:'"%h","%an","%ad","%s"' > log.csv"
-
-
-#################################################################
-### Personal
-#################################################################
-
-# Open github.com/rebz
-alias ghr="/usr/bin/open -a \"/Applications/Google Chrome.app\" 'http://github.com/rebz'"
