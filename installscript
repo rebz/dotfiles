@@ -192,6 +192,24 @@ brew install dos2unix
 
 
 
+echo 'install iterm2'
+brew install --cask iterm2
+
+echo 'install sourcetree'
+brew install --cask sourcetree
+
+echo 'install skeetch'
+brew install --cask sketch
+
+echo 'install vscode'
+brew install --cask visual-studio-code
+
+echo 'install fire code font'
+brew tap homebrew/cask-fonts
+brew install --cask font-fira-code
+
+
+
 #################################################################
 ### Cleanup
 #################################################################
