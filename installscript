@@ -204,6 +204,9 @@ brew install --cask sketch
 echo 'install vscode'
 brew install --cask visual-studio-code
 
+echo 'install yarn'
+brew install yarn
+
 echo 'install fire code font'
 brew tap homebrew/cask-fonts
 brew install --cask font-fira-code
