@@ -90,9 +90,9 @@ xcode-select --install
 ### Mac OS Mojave Required Libraries for below
 #################################################################
 
-echo 'install Mojave missing libraries'
-echo '-----------------'
-brew install openldap libiconv
+#echo 'install Mojave missing libraries'
+#echo '-----------------'
+# brew install openldap libiconv
 
 
 
@@ -108,8 +108,8 @@ clear
 
 # global git config setup
 git config --global core.autocrlf true
+git config --global user.email myemail@domain.com
 # git config --global core.excludesfile $HOME/.global-gitignore
-
 
 
 #################################################################
@@ -122,14 +122,14 @@ echo '-----------------'
 rm -rf $HOME/.oh-my-zsh
 curl -L http://install.ohmyz.sh | sh
 sudo git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions
-sudo git clone https://github.com/denysdovhan/spaceship-prompt.git "$ZSH_CUSTOM/themes/spaceship-prompt"
+# sudo git clone https://github.com/denysdovhan/spaceship-prompt.git "$ZSH_CUSTOM/themes/spaceship-prompt"
 
 # symlink zsh prefs
 rm $HOME/.zshrc
 ln -s $HOME/.dotfiles/shell/.zshrc $HOME/.zshrc
 
 # copy spaceship theme over
-sudo ln -s "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" "$ZSH_CUSTOM/themes/spaceship.zsh-theme" # TODO - this does not appear to copy over
+# sudo ln -s "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" "$ZSH_CUSTOM/themes/spaceship.zsh-theme" # TODO - this does not appear to copy over
 
 
 
@@ -141,21 +141,22 @@ echo 'install homebrew'
 echo '----------------'
 echo install homebrew
 sudo rm -rf /usr/local/Cellar /usr/local/.git && brew cleanup
-ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-echo 'Install brew-cask'
-echo '-----------------'
-brew tap caskroom/cask
-brew install brew-cask
+# TODO :: does this exist any longer?
+# echo 'Install brew-cask'
+# echo '-----------------'
+# brew tap homebrew/cask
+# brew install brew-cask
 
 
 #################################################################
 ### Sequel Pro
 #################################################################
 
-echo 'install sequel pro nightly'
-echo '---------------'
-brew cask install homebrew/cask-versions/sequel-pro-nightly
+# echo 'install sequel pro nightly'
+# echo '---------------'
+# brew cask install homebrew/cask-versions/sequel-pro-nightly
 
 
 
@@ -165,11 +166,11 @@ brew cask install homebrew/cask-versions/sequel-pro-nightly
 
 # install nvm
 echo 'install NVM'
-echo '...then `nvm install 10.15.0`'
+echo '...then `nvm install 14.19.0`'
 echo '...then install zsh nvm plugin'
 echo '---------------'
-curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.37.0/install.sh | bash
-nvm install 14.15.1
+curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.39.1/install.sh | bash
+nvm install 14.19.0
 git clone https://github.com/lukechilds/zsh-nvm ~/.oh-my-zsh/custom/plugins/zsh-nvm
 
 
@@ -178,10 +179,11 @@ git clone https://github.com/lukechilds/zsh-nvm ~/.oh-my-zsh/custom/plugins/zsh-
 ### Other
 #################################################################
 
+# TODO :: look info
 # install finder quicklook plugins
-echo 'install finder quicklook plugins'
-echo '-----------------------------------'
-brew cask install --force qlcolorcode qlstephen qlmarkdown quicklook-json qlprettypatch quicklook-csv betterzipql webp-quicklook suspicious-package
+# echo 'install finder quicklook plugins'
+# echo '-----------------------------------'
+# brew cask install --force qlcolorcode qlstephen qlmarkdown quicklook-json qlprettypatch quicklook-csv betterzipql webp-quicklook suspicious-package
 
 # dos2unix
 echo 'install dos2unix'
@@ -205,7 +207,6 @@ git reset --hard
 
 dos2unix ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 dos2unix ~/.oh-my-zsh/custom/plugins/zsh-nvm/zsh-nvm.plugin.zsh
-find ~/.oh-my-zsh/custom/themes/spaceship-prompt/. -type f -print0 | xargs -0 dos2unix
 
 echo '++++++++++++++++++++++++++++++'
 echo '++++++++++++++++++++++++++++++'
