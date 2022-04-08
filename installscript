@@ -190,10 +190,11 @@ echo 'install dos2unix'
 echo '------------'
 brew install dos2unix
 
-
-
 echo 'install iterm2'
 brew install --cask iterm2
+
+eccho 'install ngrok'
+brew install ngrok/ngrok/ngrok
 
 echo 'install sourcetree'
 brew install --cask sourcetree
