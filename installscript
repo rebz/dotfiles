@@ -143,6 +143,13 @@ echo install homebrew
 sudo rm -rf /usr/local/Cellar /usr/local/.git && brew cleanup
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
+
+
+echo 'install wget'
+echo '----------------'
+echo install wget
+brew install wget
+
 # TODO :: does this exist any longer?
 # echo 'Install brew-cask'
 # echo '-----------------'
@@ -199,7 +206,7 @@ brew install ngrok/ngrok/ngrok
 echo 'install sourcetree'
 brew install --cask sourcetree
 
-echo 'install skeetch'
+echo 'install sketch'
 brew install --cask sketch
 
 echo 'install vscode'
@@ -217,8 +224,6 @@ brew install --cask flux
 
 echo 'install spotify'
 brew install --cask spotify
-
-
 
 
 

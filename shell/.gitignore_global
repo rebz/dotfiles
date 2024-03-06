@@ -34,7 +34,7 @@
 ##########################
 
 *.log
-*.sql
+# *.sql
 *.sqlite
 
 
@@ -98,7 +98,7 @@ LocalValetDriver.php
 #         VS Code        #
 ##########################
 
-.vscode/*
+# .vscode/*
 
 
 #------------------------#
@@ -106,4 +106,5 @@ LocalValetDriver.php
 ##########################
 
 .env
+.env.*
 LocalValetDriver.php
