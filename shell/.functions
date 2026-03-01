@@ -138,6 +138,69 @@ kport() {
 }
 
 
+# mobile - Toggle remote access to this machine from your phone
+#
+# Usage:
+#   mobile        Run once to enable, run again to disable
+#
+# What it does:
+#   ON:  Starts Tailscale VPN (if not already running),
+#        enables macOS SSH (Remote Login), and creates
+#        a detached tmux session named "mobile".
+#        Prints the Tailscale IP to connect to.
+#
+#   OFF: Kills the "mobile" tmux session, disables SSH,
+#        and cleans up the state file.
+#
+# From your phone (using Termius, Blink, etc.):
+#   1. SSH into <tailscale-ip> on port 22
+#   2. Run: tmux attach -t mobile
+#
+# External files:
+#   /tmp/.mobile_mode   Tracks on/off state. Cleared on reboot.
+#
+# Dependencies:
+#   tailscale, tmux, sudo (for systemsetup)
+mobile() {
+    local state_file="/tmp/.mobile_mode"
+
+    if [ -f "$state_file" ]; then
+        # Turn off
+        echo "Disabling mobile mode..."
+
+        tmux kill-session -t mobile 2>/dev/null && echo "  tmux session killed" || echo "  tmux session already gone"
+        sudo systemsetup -setremotelogin off 2>/dev/null && echo "  SSH disabled"
+
+        rm "$state_file"
+        echo "Mobile mode OFF"
+    else
+        # Turn on
+        echo "Enabling mobile mode..."
+
+        # Tailscale
+        if ! tailscale status &>/dev/null; then
+            tailscale up && echo "  Tailscale connected"
+        else
+            echo "  Tailscale already running"
+        fi
+
+        # SSH
+        sudo systemsetup -setremotelogin on 2>/dev/null && echo "  SSH enabled"
+
+        # tmux
+        if ! tmux has-session -t mobile 2>/dev/null; then
+            tmux new-session -d -s mobile && echo "  tmux session 'mobile' started"
+        else
+            echo "  tmux session 'mobile' already exists"
+        fi
+
+        touch "$state_file"
+        echo "Mobile mode ON"
+        echo "  Connect to: $(tailscale ip -4)"
+        echo "  Attach with: tmux attach -t mobile"
+    fi
+}
+
 
 #################################################################
 ### Other
@@ -156,4 +219,10 @@ xdebug() {
       sed -i -e 's/^#zend_extension/zend_extension/g' $iniFileLocation
       echo "xdebug is now inactive";
    fi
+}
+
+# user passes a single argument that defines the tab title for the terminal
+# "Tab Title"
+tt() {
+    echo -ne "\033]0;$1\007"
 }

@@ -200,7 +200,7 @@ brew install dos2unix
 echo 'install iterm2'
 brew install --cask iterm2
 
-eccho 'install ngrok'
+echo 'install ngrok'
 brew install ngrok/ngrok/ngrok
 
 echo 'install sourcetree'
@@ -224,6 +224,26 @@ brew install --cask flux
 
 echo 'install spotify'
 brew install --cask spotify
+
+
+#################################################################
+### Mobile Access (used by `mobile` function in .functions)
+#################################################################
+
+echo 'install tmux'
+brew install tmux
+
+echo 'install tailscale'
+brew install --cask tailscale
+
+
+#################################################################
+### Agentic Tools
+#################################################################
+
+echo 'install codexbar: monitor agentic usage'
+echo 'FAILURE TO INSTALL "codexbar": requires an M-series chip'
+# brew install --cask steipete/tap/codexbar
 
 
 

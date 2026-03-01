@@ -27,7 +27,6 @@
 - switch php version-specific plugins to global install
 - create php version switcher function
 
-
 # Credits 
 - Original dotfiles from: https://github.com/freekmurze/dotfiles
 - Ideas taken from: https://github.com/lukepolo/dotfiles 

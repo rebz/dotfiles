@@ -3,6 +3,7 @@
 #################################################################
 
 #import ssh keys in keychain
+ssh-add -K ~/.ssh/puffrate-droplet 2>/dev/null
 ssh-add -K ~/.ssh/qx-cjohnson-Bitbucket 2>/dev/null
 ssh-add -K ~/.ssh/rebz-GitHub 2>/dev/null
 
@@ -55,7 +56,10 @@ plugins=(git zsh-nvm)
 bindkey  "^[[H"   beginning-of-line
 bindkey  "^[[F"   end-of-line
 
-
+export PATH="/usr/local/bin:$PATH"
+export PATH="/usr/local/bin/brew:$PATH"
+export PATH="/usr/local/Homebrew/bin:$PATH"
+export PATH="/opt/homebrew/bin:$PATH"
 
 #################################################################
 ### Load Aliases functions exports
@@ -148,17 +152,17 @@ load-nvmrc
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/Users/cjohnson/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/Users/cjohnson/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/Users/cjohnson/anaconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/Users/cjohnson/anaconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
+# __conda_setup="$('/Users/cjohnson/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+# if [ $? -eq 0 ]; then
+#     eval "$__conda_setup"
+# else
+#     if [ -f "/Users/cjohnson/anaconda3/etc/profile.d/conda.sh" ]; then
+#         . "/Users/cjohnson/anaconda3/etc/profile.d/conda.sh"
+#     else
+#         export PATH="/Users/cjohnson/anaconda3/bin:$PATH"
+#     fi
+# fi
+# unset __conda_setup
 # <<< conda initialize <<<
 
 
@@ -169,3 +173,25 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/cjohnson/Code/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/cjohnson/Code/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/cjohnson/Code/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/cjohnson/Code/google-cloud-sdk/completion.zsh.inc'; fi
+
+# Created by `pipx` on 2024-11-24 22:25:06
+export PATH="$PATH:/Users/cjohnson/.local/bin"
+
+export PATH="/usr/local/bin/brew:$PATH"
+export PATH="/usr/local/Homebrew/bin:$PATH"
+export PATH="/opt/homebrew/bin:$PATH"
+
+# used for pg_dump, verify db script for puffrate.com
+export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
+export PATH="/usr/local/opt/postgresql@17/bin:$PATH"
+
+export QX_NPM_TOKEN="1tj0nRo6MZQ6dLP0/Qw/lqRI13Tidi2gjJ5xk3uxWHaCoaXolKElrBpEAinF9nzWE8Y7mbeCjOmIFD498Nd+dw=="
+alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
+
+export DISABLE_AUTO_TITLE="true"
