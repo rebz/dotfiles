@@ -90,6 +90,7 @@ defaults write com.googlecode.iterm2 "Default Bookmark Guid" -string "d07f11e5-0
 # and the ⌘Space hotkey (Spotlight's ⌘Space is disabled in osx/set-defaults.sh)
 echo 'configure Alfred preferences sync'
 echo '----------------'
+# shellcheck disable=SC2088  # literal tilde is intentional: Alfred stores this pref tilde-relative
 defaults write com.runningwithcrayons.Alfred-Preferences syncfolder "~/.dotfiles/alfred"
 echo 'NOTE: re-enter your Alfred Powerpack license manually (not stored in repo)'
 
