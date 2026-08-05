@@ -43,12 +43,23 @@ cask "visual-studio-code"
 cask "cursor"
 cask "alfred"          # prefs restored from alfred/ (see installscript)
 cask "google-chrome"
+cask "firefox"
+cask "microsoft-edge"
 cask "tableplus"
 cask "sketch"
 cask "spotify"
 cask "flux-app"        # f.lux (brew renamed the old "flux" cask)
 cask "tailscale-app"   # brew renamed the old "tailscale" cask
 cask "ngrok"
+cask "vlc"
+cask "obs"
+cask "blender"
+# DaVinci Resolve: no cask (Blackmagic gates the download) — manual install, see README
+
+# 3D printing
+cask "creality-print"
+cask "creality-slicer"
+cask "ultimaker-cura"
 
 #################################################################
 ### Mac App Store (requires being signed in to the App Store)
