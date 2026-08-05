@@ -50,6 +50,7 @@ cask "sketch"
 cask "spotify"
 cask "flux-app"        # f.lux (brew renamed the old "flux" cask)
 cask "tailscale-app"   # brew renamed the old "tailscale" cask
+cask "privatevpn"
 cask "ngrok"
 cask "vlc"
 cask "obs"
