@@ -13,7 +13,7 @@ Personal macOS dotfiles. Cloned to `~/.dotfiles` on a new Mac and run **once** v
 
 ## Hard rules
 
-- **Never commit secrets.** Tokens/keys go in `.env` only (see `.env.example`). If you find a hardcoded credential in any shell file, flag it — don't copy the pattern.
+- **Never commit secrets.** Tokens/keys go in `.env` or the gitignored `rclone/rclone.conf` (see the `.example` twins). If you find a hardcoded credential in any file, flag it — don't copy the pattern.
 - **Never run `bootstrap`/`installscript` on this machine** — they are for fresh Macs and contain destructive steps (`rm -rf ~/.oh-my-zsh`, `sudo rm -rf /usr/local/Cellar`, deleting `~/.zshrc`). Suggest changes; let the human run scripts.
 - Target is Apple Silicon: Homebrew lives at `/opt/homebrew`. Don't add new `/usr/local` paths.
 

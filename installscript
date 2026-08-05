@@ -80,6 +80,45 @@ defaults write com.googlecode.iterm2 "Default Bookmark Guid" -string "d07f11e5-0
 
 
 #################################################################
+### Alfred preferences
+#################################################################
+
+# point Alfred's sync at the repo snapshot — restores workflows, themes,
+# and the ⌘Space hotkey (Spotlight's ⌘Space is disabled in osx/set-defaults.sh)
+echo 'configure Alfred preferences sync'
+echo '----------------'
+defaults write com.runningwithcrayons.Alfred-Preferences syncfolder "~/.dotfiles/alfred"
+echo 'NOTE: re-enter your Alfred Powerpack license manually (not stored in repo)'
+
+
+
+#################################################################
+### Editor settings (VS Code + Cursor share vscode/)
+#################################################################
+
+echo 'link shared editor settings'
+echo '----------------'
+bash "$HOME/.dotfiles/scripts/link-editor-settings.sh"
+
+
+
+#################################################################
+### rclone config
+#################################################################
+
+# real config is gitignored (holds R2 credentials) — copy it from the old
+# machine into ~/.dotfiles/rclone/rclone.conf alongside .env
+if [ -f "$HOME/.dotfiles/rclone/rclone.conf" ]; then
+    mkdir -p "$HOME/.config/rclone"
+    ln -sfn "$HOME/.dotfiles/rclone/rclone.conf" "$HOME/.config/rclone/rclone.conf"
+    echo 'rclone config linked'
+else
+    echo 'rclone: no rclone/rclone.conf found — copy it from the old machine or run `rclone config` (see rclone/rclone.conf.example)'
+fi
+
+
+
+#################################################################
 ### Node
 #################################################################
 

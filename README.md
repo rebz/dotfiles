@@ -15,8 +15,11 @@ git clone git@github.com:rebz/dotfiles.git ~/.dotfiles
 2. Symlinks git config (`.gitconfig`, `.gitignore_global`)
 3. Installs oh-my-zsh + zsh-autosuggestions and symlinks `.zshrc`
 4. Installs Homebrew, then everything in the `Brewfile` via `brew bundle`
-5. Installs the iTerm2 dynamic profile (Maple Mono NF font) and sets it as default
-6. Installs NVM + Node 24.19.0 (system default), plus npm-only CLIs (Grok Build, Ionic)
+5. Installs the iTerm2 dynamic profile (Maple Mono NF font + current theme) and sets it as default
+6. Points Alfred's preferences sync at `alfred/` (workflows, themes, ⌘Space hotkey)
+7. Symlinks shared VS Code/Cursor settings from `vscode/`
+8. Links `~/.config/rclone/rclone.conf` to the (gitignored) `rclone/rclone.conf` if present
+9. Installs NVM + Node 24.19.0 (system default), plus npm-only CLIs (Grok Build, Ionic)
 
 After it finishes, optionally run:
 
@@ -32,7 +35,7 @@ Everything brew-managed is declared in the [`Brewfile`](Brewfile) — that file 
 
 **AI CLIs:** Claude Code, Codex, Gemini CLI (Nano Banana image gen lives inside Gemini), CodexBar; Grok Build via npm
 
-**Apps (casks):** iTerm2, Docker Desktop, VS Code, Sourcetree, Sketch, Spotify, Flux, Tailscale, ngrok
+**Apps (casks):** iTerm2, Docker Desktop, VS Code, Cursor, Alfred, Google Chrome, Sourcetree, Sketch, Spotify, Flux, Tailscale, ngrok
 
 **Fonts:** Maple Mono NF (terminal font, wired into the iTerm2 profile)
 
@@ -46,8 +49,12 @@ The libpq/rclone/doctl/cocoapods/Docker picks exist to support puffrate.com's in
 bootstrap              # entry point — confirm, then run installscript
 installscript          # main provisioning script (brew bundle, zsh, node)
 Brewfile               # declarative package list (brew bundle)
-osx/set-defaults.sh    # macOS defaults (Finder, Dock, screenshots)
-iterm2/                # iTerm2 dynamic profile (Maple Mono NF)
+osx/set-defaults.sh    # macOS defaults (Finder, Dock, screenshots, Spotlight off ⌘Space)
+iterm2/                # iTerm2 dynamic profile (Maple Mono NF + theme)
+alfred/                # Alfred preferences snapshot (Alfred syncs to this dir)
+vscode/                # shared settings/keybindings for VS Code AND Cursor
+rclone/                # rclone.conf.example; real conf is gitignored
+scripts/               # helper scripts (link-editor-settings.sh)
 shell/
   .zshrc               # symlinked to ~/.zshrc
   .aliases             # git, navigation, network helpers
@@ -63,6 +70,8 @@ fonts/                 # Ubuntu Mono Powerline fonts (legacy)
 
 - **Machine-local shell config:** create `~/.dotfiles-custom/shell/.{exports,aliases,functions,zshrc}` — anything there is sourced by `.zshrc` but never committed.
 - **Secrets:** copy `.env.example` to `.env` and fill in values. `.env` is git-ignored and sourced by `.zshrc`. Never put real values anywhere else in this repo.
+- **rclone:** the real `rclone/rclone.conf` (R2 credentials) is git-ignored — carry it between machines manually like `.env`, or recreate it from `rclone/rclone.conf.example` with `rclone config`.
+- **Editors:** `vscode/settings.json` + `keybindings.json` are the single source for both VS Code and Cursor (symlinked by `scripts/link-editor-settings.sh`). Extensions are per-app and not synced here.
 
 ## Notable helpers
 
@@ -76,6 +85,9 @@ fonts/                 # Ubuntu Mono Powerline fonts (legacy)
 
 - [ ] Generate/copy SSH keys, update the `ssh-add` lines at the top of `shell/.zshrc` to match the key filenames on this machine
 - [ ] `cp .env.example .env` and fill in secrets
+- [ ] Copy `rclone/rclone.conf` over from the old machine (gitignored, like `.env`)
+- [ ] Enter Alfred Powerpack license; confirm ⌘Space opens Alfred (logout may be needed for Spotlight to release it)
+- [ ] Install editor extensions in VS Code and Cursor (settings are shared, extensions are not)
 - [ ] Sign in: Tailscale, Spotify, Sourcetree, VS Code sync, Docker Desktop
 - [ ] Auth the AI CLIs: `claude`, `codex`, `gemini`, `grok`
 - [ ] `gh auth login` (required by `puff build`)

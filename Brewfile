@@ -39,11 +39,14 @@ cask "codexbar"     # menu-bar agent usage monitor (M-series only)
 cask "iterm2"
 cask "docker-desktop"  # puffrate is compose-based (swap for orbstack if preferred)
 cask "visual-studio-code"
+cask "cursor"
+cask "alfred"          # prefs restored from alfred/ (see installscript)
+cask "google-chrome"
 cask "sourcetree"
 cask "sketch"
 cask "spotify"
 cask "flux"
-cask "tailscale"
+cask "tailscale-app"   # brew renamed the old "tailscale" cask
 cask "ngrok"
 
 #################################################################

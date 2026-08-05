@@ -36,6 +36,14 @@ defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 /usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
 
 ###############################################################################
+# Spotlight vs Alfred                                                         #
+###############################################################################
+
+# Disable Spotlight's CMD+Space hotkey so Alfred can own it (logout to apply)
+/usr/libexec/PlistBuddy -c "Set :AppleSymbolicHotKeys:64:enabled false" ~/Library/Preferences/com.apple.symbolichotkeys.plist 2>/dev/null \
+  || defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 64 "<dict><key>enabled</key><false/></dict>"
+
+###############################################################################
 # Dock                                                                        #
 ###############################################################################
 
