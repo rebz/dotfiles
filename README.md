@@ -11,35 +11,43 @@ git clone git@github.com:rebz/dotfiles.git ~/.dotfiles
 
 `bootstrap` asks for confirmation, then runs `installscript`, which:
 
-1. Applies a handful of macOS defaults (Finder, Dock, screenshots)
-2. Installs Xcode Command Line Tools
-3. Symlinks git config (`.gitconfig`, `.gitignore_global`)
-4. Installs oh-my-zsh + zsh-autosuggestions and symlinks `.zshrc`
-5. Installs Homebrew, then CLI tools and apps (see below)
-6. Installs NVM + Node
+1. Installs Xcode Command Line Tools (waits for the dialog)
+2. Symlinks git config (`.gitconfig`, `.gitignore_global`)
+3. Installs oh-my-zsh + zsh-autosuggestions and symlinks `.zshrc`
+4. Installs Homebrew, then everything in the `Brewfile` via `brew bundle`
+5. Installs the iTerm2 dynamic profile (Maple Mono NF font) and sets it as default
+6. Installs NVM + Node 24.19.0 (system default), plus npm-only CLIs (Grok Build, Ionic)
 
 After it finishes, optionally run:
 
 ```sh
-~/.dotfiles/osx/set-defaults.sh   # power/hibernation defaults (sudo)
+~/.dotfiles/osx/set-defaults.sh   # Finder/Dock/screenshot defaults
 ```
 
 ## What gets installed
 
-**CLI:** wget, dos2unix, yarn, tmux, ngrok, nvm (+ zsh-nvm plugin)
+Everything brew-managed is declared in the [`Brewfile`](Brewfile) — that file is the source of truth. Highlights:
 
-**Apps (casks):** iTerm2, VS Code, Sourcetree, Sketch, Spotify, Flux, Tailscale
+**Core CLI:** bash 4+, wget, gh, git-delta, jq, tmux, yarn, pnpm, libpq (psql/pg_dump), rclone, doctl, cocoapods
 
-**Fonts:** Fira Code (terminal); Ubuntu Mono Powerline variants live in `fonts/`
+**AI CLIs:** Claude Code, Codex, Gemini CLI (Nano Banana image gen lives inside Gemini), CodexBar; Grok Build via npm
+
+**Apps (casks):** iTerm2, Docker Desktop, VS Code, Sourcetree, Sketch, Spotify, Flux, Tailscale, ngrok
+
+**Fonts:** Maple Mono NF (terminal font, wired into the iTerm2 profile)
 
 **Shell:** oh-my-zsh (`robbyrussell` theme), zsh-autosuggestions, zsh-nvm with `.nvmrc` auto-switching
+
+The libpq/rclone/doctl/cocoapods/Docker picks exist to support puffrate.com's infrastructure (Docker Compose stack, DigitalOcean droplet + DOCR, Cloudflare R2 backups, `puff` CLI, iOS app).
 
 ## Repo layout
 
 ```
 bootstrap              # entry point — confirm, then run installscript
-installscript          # main provisioning script (brew, zsh, node, apps)
-osx/set-defaults.sh    # extra macOS defaults (pmset/hibernation)
+installscript          # main provisioning script (brew bundle, zsh, node)
+Brewfile               # declarative package list (brew bundle)
+osx/set-defaults.sh    # macOS defaults (Finder, Dock, screenshots)
+iterm2/                # iTerm2 dynamic profile (Maple Mono NF)
 shell/
   .zshrc               # symlinked to ~/.zshrc
   .aliases             # git, navigation, network helpers
@@ -47,7 +55,7 @@ shell/
   .exports             # EDITOR, history, locale
   .gitconfig           # symlinked to ~/.gitconfig
   .gitignore_global    # symlinked to ~/.gitignore_global
-fonts/                 # Ubuntu Mono Powerline fonts
+fonts/                 # Ubuntu Mono Powerline fonts (legacy)
 .env.example           # template for machine-local secrets
 ```
 
@@ -68,9 +76,12 @@ fonts/                 # Ubuntu Mono Powerline fonts
 
 - [ ] Generate/copy SSH keys, update the `ssh-add` lines at the top of `shell/.zshrc` to match the key filenames on this machine
 - [ ] `cp .env.example .env` and fill in secrets
-- [ ] Sign in: Tailscale, Spotify, Sourcetree, VS Code sync
-- [ ] `nvm install --lts` and `nvm alias default` the version you want
-- [ ] Set iTerm2 font to Fira Code
+- [ ] Sign in: Tailscale, Spotify, Sourcetree, VS Code sync, Docker Desktop
+- [ ] Auth the AI CLIs: `claude`, `codex`, `gemini`, `grok`
+- [ ] `gh auth login` (required by `puff build`)
+- [ ] rclone remote config for puffrate R2 backups (`rclone config`)
+- [ ] puff CLI: `cd ~/Code/github/puffrate.com/cli && npm i && npm run build && npm link`
+- [ ] iTerm2 → confirm the "Dotfiles" dynamic profile is default (Maple Mono NF)
 
 ## Credits
 

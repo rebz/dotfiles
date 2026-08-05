@@ -58,9 +58,24 @@ echo '----------------'
 # make brew usable in this shell (Apple Silicon)
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
-echo 'install wget'
+echo 'install packages from Brewfile'
 echo '----------------'
-brew install wget
+brew trust ngrok/ngrok 2>/dev/null || true
+brew trust steipete/tap 2>/dev/null || true
+brew bundle --file="$HOME/.dotfiles/Brewfile"
+
+
+
+#################################################################
+### iTerm2 profile (Maple Mono NF font)
+#################################################################
+
+echo 'install iTerm2 dynamic profile'
+echo '----------------'
+mkdir -p "$HOME/Library/Application Support/iTerm2/DynamicProfiles"
+cp "$HOME/.dotfiles/iterm2/dotfiles-profile.json" "$HOME/Library/Application Support/iTerm2/DynamicProfiles/"
+# make it the default profile (guid must match iterm2/dotfiles-profile.json)
+defaults write com.googlecode.iterm2 "Default Bookmark Guid" -string "d07f11e5-0000-4000-8000-000000000001"
 
 
 
@@ -68,65 +83,20 @@ brew install wget
 ### Node
 #################################################################
 
-echo 'install NVM + Node LTS'
+echo 'install NVM + Node 24.19.0 LTS'
 echo '---------------'
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-nvm install --lts
+nvm install 24.19.0
+nvm alias default 24.19.0
 git clone https://github.com/lukechilds/zsh-nvm ~/.oh-my-zsh/custom/plugins/zsh-nvm
 
+# Grok Build (xAI) — no brew package; official npm distribution
+npm install -g @xai-official/grok
 
-
-#################################################################
-### Other
-#################################################################
-
-echo 'install iterm2'
-brew install --cask iterm2
-
-echo 'install ngrok'
-brew install ngrok/ngrok/ngrok
-
-echo 'install sourcetree'
-brew install --cask sourcetree
-
-echo 'install sketch'
-brew install --cask sketch
-
-echo 'install vscode'
-brew install --cask visual-studio-code
-
-echo 'install yarn'
-brew install yarn
-
-echo 'install fira code font for terminal'
-brew install --cask font-fira-code
-
-echo 'install flux'
-brew install --cask flux
-
-echo 'install spotify'
-brew install --cask spotify
-
-
-#################################################################
-### Mobile Access (used by `mobile` function in .functions)
-#################################################################
-
-echo 'install tmux'
-brew install tmux
-
-echo 'install tailscale'
-brew install --cask tailscale
-
-
-#################################################################
-### Agentic Tools
-#################################################################
-
-echo 'install codexbar: monitor agentic usage (M-series only)'
-brew install --cask steipete/tap/codexbar
+# Ionic CLI for puffrate native/ iOS work
+npm install -g @ionic/cli
 
 
 
