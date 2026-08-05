@@ -35,7 +35,7 @@ Everything brew-managed is declared in the [`Brewfile`](Brewfile) — that file 
 
 **AI CLIs:** Claude Code, Codex, Gemini CLI (Nano Banana image gen lives inside Gemini), CodexBar; Grok Build via npm
 
-**Apps (casks):** iTerm2, Docker Desktop, VS Code, Cursor, Alfred, Google Chrome, Sourcetree, Sketch, Spotify, Flux, Tailscale, ngrok
+**Apps (casks):** iTerm2, Docker Desktop, VS Code, Cursor, Alfred, Google Chrome, Sketch, Spotify, Flux, Tailscale, ngrok
 
 **Fonts:** Maple Mono NF (terminal font, wired into the iTerm2 profile)
 
@@ -87,7 +87,7 @@ shell/
 - [ ] Copy `rclone/rclone.conf` over from the old machine (gitignored, like `.env`)
 - [ ] Enter Alfred Powerpack license; confirm ⌘Space opens Alfred (logout may be needed for Spotlight to release it)
 - [ ] Install editor extensions in VS Code and Cursor (settings are shared, extensions are not)
-- [ ] Sign in: Tailscale, Spotify, Sourcetree, VS Code sync, Docker Desktop
+- [ ] Sign in: Tailscale, Spotify, VS Code sync, Docker Desktop
 - [ ] Auth the AI CLIs: `claude`, `codex`, `gemini`, `grok`
 - [ ] `gh auth login` (required by `puff build`)
 - [ ] rclone remote config for puffrate R2 backups (`rclone config`)
