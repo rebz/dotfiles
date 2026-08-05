@@ -191,16 +191,16 @@ export PATH="/opt/homebrew/bin:$PATH"
 export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
 export PATH="/usr/local/opt/postgresql@17/bin:$PATH"
 
-export QX_NPM_TOKEN="1tj0nRo6MZQ6dLP0/Qw/lqRI13Tidi2gjJ5xk3uxWHaCoaXolKElrBpEAinF9nzWE8Y7mbeCjOmIFD498Nd+dw=="
 alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
 
 export DISABLE_AUTO_TITLE="true"
 export CLAUDE_TITLE_PREFIX="🤖"
 
-# Allows MCP Access by Claude
+# Machine-local secrets (see .env.example)
 if [ -f "$HOME/.dotfiles/.env" ]; then
   source "$HOME/.dotfiles/.env"
   export PUFFRATE_MCP_TOKEN_LOCAL
+  export QX_NPM_TOKEN
 fi
 
 
