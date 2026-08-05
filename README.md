@@ -35,7 +35,7 @@ Everything brew-managed is declared in the [`Brewfile`](Brewfile) — that file 
 
 **AI CLIs:** Claude Code, Codex, Gemini CLI (Nano Banana image gen lives inside Gemini), CodexBar; Grok Build via npm
 
-**Apps (casks):** iTerm2, Docker Desktop, VS Code, Cursor, Alfred, Google Chrome, Sketch, Spotify, Flux, Tailscale, ngrok
+**Apps (casks):** iTerm2, Docker Desktop, VS Code, Cursor, Alfred, Google Chrome, TablePlus, Sketch, Spotify, Flux, Tailscale, ngrok
 
 **App Store (via `mas`):** Bear, Fantastical, GIPHY Capture — requires being signed in to the App Store before running the install
 

@@ -43,6 +43,7 @@ cask "visual-studio-code"
 cask "cursor"
 cask "alfred"          # prefs restored from alfred/ (see installscript)
 cask "google-chrome"
+cask "tableplus"
 cask "sketch"
 cask "spotify"
 cask "flux-app"        # f.lux (brew renamed the old "flux" cask)
