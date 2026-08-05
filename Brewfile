@@ -22,6 +22,11 @@ brew "libpq"       # psql/pg_dump/pg_restore (puffrate db + backup scripts)
 brew "rclone"      # Cloudflare R2 backups (puffrate verify-backup.sh)
 brew "doctl"       # DigitalOcean registry/droplet ops
 brew "cocoapods"   # puffrate native/ iOS builds
+brew "shellcheck"  # lint bash scripts (installscript, puffrate deploy.sh)
+brew "gitleaks"    # scan commits for leaked secrets
+brew "ripgrep"     # fast gitignore-aware grep (rg) — also used by AI CLIs
+brew "lazydocker"  # TUI for the puffrate compose stack
+brew "dive"        # inspect Docker image layers/bloat
 
 #################################################################
 ### AI / Agentic CLIs
@@ -71,6 +76,7 @@ cask "ultimaker-cura"
 mas "Bear", id: 1091189122          # App Store only — no cask exists
 mas "Fantastical", id: 975937182    # cask exists, but license/sub is via App Store
 mas "GIPHY Capture", id: 668208984  # App Store only — no cask exists
+mas "Xcode", id: 497799835          # ~12GB — needed for puffrate native/ iOS builds
 
 #################################################################
 ### Fonts

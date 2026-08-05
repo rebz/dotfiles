@@ -31,13 +31,13 @@ After it finishes, optionally run:
 
 Everything brew-managed is declared in the [`Brewfile`](Brewfile) — that file is the source of truth. Highlights:
 
-**Core CLI:** bash 4+, wget, gh, git-delta, jq, tmux, yarn, pnpm, libpq (psql/pg_dump), rclone, doctl, cocoapods
+**Core CLI:** bash 4+, wget, gh, git-delta, jq, tmux, yarn, pnpm, libpq (psql/pg_dump), rclone, doctl, cocoapods, shellcheck, gitleaks, ripgrep, lazydocker, dive
 
 **AI CLIs:** Claude Code, Codex, Gemini CLI (Nano Banana image gen lives inside Gemini), CodexBar; Grok Build via npm
 
 **Apps (casks):** iTerm2, Docker Desktop, VS Code, Cursor, Alfred, Google Chrome, Firefox, Edge, TablePlus, Postman, Sketch, Spotify, Flux, Tailscale, PrivateVPN, OpenVPN Connect, ngrok, VLC, OBS, Blender, Creality Print, Creality Slicer, UltiMaker Cura
 
-**App Store (via `mas`):** Bear, Fantastical, GIPHY Capture — requires being signed in to the App Store before running the install
+**App Store (via `mas`):** Bear, Fantastical, GIPHY Capture, Xcode (~12GB) — requires being signed in to the App Store before running the install
 
 **Fonts:** Maple Mono NF (terminal font, wired into the iTerm2 profile)
 
@@ -89,6 +89,7 @@ shell/
 - [ ] Copy `rclone/rclone.conf` over from the old machine (gitignored, like `.env`)
 - [ ] Enter Alfred Powerpack license; confirm ⌘Space opens Alfred (logout may be needed for Spotlight to release it)
 - [ ] Install editor extensions in VS Code and Cursor (settings are shared, extensions are not)
+- [ ] Xcode first-run: `sudo xcodebuild -license accept && xcodebuild -runFirstLaunch`, then `xcode-select -s /Applications/Xcode.app`
 - [ ] DaVinci Resolve: manual download from [Blackmagic](https://www.blackmagicdesign.com/products/davinciresolve) (no brew cask; download requires their login)
 - [ ] ProcXray (process explorer): manual download from [procxray.com](https://procxray.com/) (no brew cask or App Store listing)
 - [ ] Sign in to the App Store BEFORE running bootstrap (needed for `mas` installs: Bear, Fantastical)
