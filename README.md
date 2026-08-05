@@ -37,7 +37,7 @@ Everything brew-managed is declared in the [`Brewfile`](Brewfile) — that file 
 
 **Apps (casks):** iTerm2, Docker Desktop, VS Code, Cursor, Alfred, Google Chrome, Sketch, Spotify, Flux, Tailscale, ngrok
 
-**App Store (via `mas`):** Bear, Fantastical — requires being signed in to the App Store before running the install
+**App Store (via `mas`):** Bear, Fantastical, GIPHY Capture — requires being signed in to the App Store before running the install
 
 **Fonts:** Maple Mono NF (terminal font, wired into the iTerm2 profile)
 

@@ -55,6 +55,7 @@ cask "ngrok"
 
 mas "Bear", id: 1091189122          # App Store only — no cask exists
 mas "Fantastical", id: 975937182    # cask exists, but license/sub is via App Store
+mas "GIPHY Capture", id: 668208984  # App Store only — no cask exists
 
 #################################################################
 ### Fonts
