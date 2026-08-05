@@ -90,6 +90,7 @@ shell/
 - [ ] Enter Alfred Powerpack license; confirm ⌘Space opens Alfred (logout may be needed for Spotlight to release it)
 - [ ] Install editor extensions in VS Code and Cursor (settings are shared, extensions are not)
 - [ ] DaVinci Resolve: manual download from [Blackmagic](https://www.blackmagicdesign.com/products/davinciresolve) (no brew cask; download requires their login)
+- [ ] ProcXray (process explorer): manual download from [procxray.com](https://procxray.com/) (no brew cask or App Store listing)
 - [ ] Sign in to the App Store BEFORE running bootstrap (needed for `mas` installs: Bear, Fantastical)
 - [ ] Sign in: Tailscale, Spotify, VS Code sync, Docker Desktop
 - [ ] Auth the AI CLIs: `claude`, `codex`, `gemini`, `grok`
