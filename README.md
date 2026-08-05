@@ -62,7 +62,6 @@ shell/
   .exports             # EDITOR, history, locale
   .gitconfig           # symlinked to ~/.gitconfig
   .gitignore_global    # symlinked to ~/.gitignore_global
-fonts/                 # Ubuntu Mono Powerline fonts (legacy)
 .env.example           # template for machine-local secrets
 ```
 

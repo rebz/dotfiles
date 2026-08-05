@@ -45,7 +45,7 @@ cask "google-chrome"
 cask "sourcetree"
 cask "sketch"
 cask "spotify"
-cask "flux"
+cask "flux-app"        # f.lux (brew renamed the old "flux" cask)
 cask "tailscale-app"   # brew renamed the old "tailscale" cask
 cask "ngrok"
 
