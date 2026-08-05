@@ -195,3 +195,79 @@ export QX_NPM_TOKEN="1tj0nRo6MZQ6dLP0/Qw/lqRI13Tidi2gjJ5xk3uxWHaCoaXolKElrBpEAin
 alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
 
 export DISABLE_AUTO_TITLE="true"
+export CLAUDE_TITLE_PREFIX="🤖"
+
+# Allows MCP Access by Claude
+if [ -f "$HOME/.dotfiles/.env" ]; then
+  source "$HOME/.dotfiles/.env"
+  export PUFFRATE_MCP_TOKEN_LOCAL
+fi
+
+
+# ============================================================================
+# CLAUDE_TERMINAL_TITLE_SETUP - Terminal Title Skill Configuration
+# Added by terminal-title skill setup script
+# ============================================================================
+
+# Override macOS Terminal.app's update_terminal_cwd to preserve Claude titles
+update_terminal_cwd() {
+    local title_file="${HOME}/.claude/terminal_title"
+
+    if [ -f "$title_file" ]; then
+        local claude_title=$(cat "$title_file" 2>/dev/null)
+
+        if [ -n "$claude_title" ]; then
+            # Check if this shell session has already claimed a title
+            if [ -n "$CLAUDE_TITLE_CLAIMED" ]; then
+                # This session has claimed a title - use it indefinitely
+                printf '\033]0;%s\007' "$claude_title"
+                return
+            else
+                # New shell session - check if title is fresh (< 5 minutes)
+                local current_time=$(date +%s)
+                local file_time
+                
+                # Detect OS and use appropriate stat command
+                if [[ "$OSTYPE" == "darwin"* ]]; then
+                    file_time=$(stat -f %m "$title_file" 2>/dev/null)
+                elif [[ "$OSTYPE" == "linux-gnu"* ]] || [[ "$OSTYPE" == "linux"* ]]; then
+                    file_time=$(stat -c %Y "$title_file" 2>/dev/null)
+                else
+                    # Fallback: use find for modification time
+                    file_time=$(find "$title_file" -printf '%T@' 2>/dev/null | cut -d. -f1)
+                    if [[ -z "$file_time" ]]; then
+                        # Last resort: try ls -T (BSD) or ls --time-style (GNU)
+                        file_time=$(ls -T "$title_file" 2>/dev/null | awk '{print $6" "$7" "$8}' | xargs -I {} date -j -f "%b %d %H:%M:%S" "{}" +%s 2>/dev/null || \
+                                   ls -l --time-style=+%s "$title_file" 2>/dev/null | awk '{print $6}' 2>/dev/null)
+                    fi
+                fi
+                
+                # If we can't get file time, assume it's stale and skip
+                if [[ -z "$file_time" ]] || ! [[ "$file_time" =~ ^[0-9]+$ ]]; then
+                    # Fallback: show current directory
+                    printf '\033]0;%s\007' "${PWD/#$HOME/~}"
+                    return
+                fi
+                
+                local age=$((current_time - file_time))
+
+                if [ $age -lt 300 ]; then
+                    # Title is fresh - claim it for this shell session
+                    export CLAUDE_TITLE_CLAIMED=1
+                    printf '\033]0;%s\007' "$claude_title"
+                    return
+                fi
+            fi
+        fi
+    fi
+
+    # Fallback: show current directory
+    printf '\033]0;%s\007' "${PWD/#$HOME/~}"
+}
+
+# Make sure our override is called
+if [[ ! "${precmd_functions[(r)update_terminal_cwd]}" == "update_terminal_cwd" ]]; then
+    precmd_functions+=(update_terminal_cwd)
+fi
+
+# ============================================================================
