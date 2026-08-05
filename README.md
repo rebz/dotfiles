@@ -41,7 +41,7 @@ Everything brew-managed is declared in the [`Brewfile`](Brewfile) — that file 
 
 **Fonts:** Maple Mono NF (terminal font, wired into the iTerm2 profile)
 
-**Shell:** oh-my-zsh (`robbyrussell` theme), zsh-autosuggestions, zsh-syntax-highlighting, zsh-nvm with `.nvmrc` auto-switching
+**Shell:** oh-my-zsh (`robbyrussell` theme) with zsh-autosuggestions, zsh-syntax-highlighting, zsh-history-substring-search (↑/↓ search), zsh-completions, and built-ins: docker, docker-compose, npm, extract, sudo (2×ESC), z (dir jumping), plus zsh-nvm with `.nvmrc` auto-switching
 
 The libpq/rclone/doctl/cocoapods/Docker picks exist to support puffrate.com's infrastructure (Docker Compose stack, DigitalOcean droplet + DOCR, Cloudflare R2 backups, `puff` CLI, iOS app).
 

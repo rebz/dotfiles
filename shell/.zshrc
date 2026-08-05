@@ -34,8 +34,11 @@ DEFAULT_USER=`whoami`
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-# zsh-syntax-highlighting must stay last (its sourcing requirement)
-plugins=(git zsh-nvm zsh-autosuggestions zsh-syntax-highlighting)
+# order matters: zsh-syntax-highlighting near-last, history-substring-search after it
+plugins=(git zsh-nvm docker docker-compose npm extract sudo z zsh-autosuggestions zsh-syntax-highlighting zsh-history-substring-search)
+
+# zsh-completions: extra completion defs go on fpath before compinit (not a normal plugin)
+fpath+="${ZSH_CUSTOM:-$ZSH/custom}/plugins/zsh-completions/src"
 
 
 
@@ -88,6 +91,10 @@ export NVM_AUTO_USE=true
 #################################################################
 
 source $ZSH/oh-my-zsh.sh
+
+# up/down arrows search history for what's already typed (history-substring-search)
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
