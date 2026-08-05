@@ -1,17 +1,12 @@
 # Make vim the default editor
 export EDITOR="vim"
 
-# Larger bash history (allow 32³ entries; default is 500)
+# Larger history (zsh)
 export HISTSIZE=32768
-export HISTFILESIZE=$HISTSIZE
-export HISTCONTROL=ignoredups
-
-# Make some commands not show up in history
-export HISTIGNORE="ls:cd:cd -:pwd:exit:date:* --help"
+export SAVEHIST=$HISTSIZE
+setopt HIST_IGNORE_DUPS   # skip consecutive duplicates
+setopt HIST_IGNORE_SPACE  # commands starting with a space stay out of history
 
 # Prefer US English and use UTF-8
 export LANG="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
-
-# Always enable colored `grep` output
-export GREP_OPTIONS="--color=auto"
