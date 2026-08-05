@@ -10,6 +10,7 @@ tap "steipete/tap"
 #################################################################
 
 brew "bash"        # macOS ships 3.2; puffrate deploy.sh needs 4+
+brew "mas"         # Mac App Store CLI — lets brew bundle install MAS apps
 brew "wget"
 brew "gh"          # GitHub CLI (required by `puff build`)
 brew "git-delta"   # better git diffs
@@ -47,6 +48,13 @@ cask "spotify"
 cask "flux-app"        # f.lux (brew renamed the old "flux" cask)
 cask "tailscale-app"   # brew renamed the old "tailscale" cask
 cask "ngrok"
+
+#################################################################
+### Mac App Store (requires being signed in to the App Store)
+#################################################################
+
+mas "Bear", id: 1091189122          # App Store only — no cask exists
+mas "Fantastical", id: 975937182    # cask exists, but license/sub is via App Store
 
 #################################################################
 ### Fonts

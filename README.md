@@ -37,6 +37,8 @@ Everything brew-managed is declared in the [`Brewfile`](Brewfile) — that file 
 
 **Apps (casks):** iTerm2, Docker Desktop, VS Code, Cursor, Alfred, Google Chrome, Sketch, Spotify, Flux, Tailscale, ngrok
 
+**App Store (via `mas`):** Bear, Fantastical — requires being signed in to the App Store before running the install
+
 **Fonts:** Maple Mono NF (terminal font, wired into the iTerm2 profile)
 
 **Shell:** oh-my-zsh (`robbyrussell` theme), zsh-autosuggestions, zsh-nvm with `.nvmrc` auto-switching
@@ -87,6 +89,7 @@ shell/
 - [ ] Copy `rclone/rclone.conf` over from the old machine (gitignored, like `.env`)
 - [ ] Enter Alfred Powerpack license; confirm ⌘Space opens Alfred (logout may be needed for Spotlight to release it)
 - [ ] Install editor extensions in VS Code and Cursor (settings are shared, extensions are not)
+- [ ] Sign in to the App Store BEFORE running bootstrap (needed for `mas` installs: Bear, Fantastical)
 - [ ] Sign in: Tailscale, Spotify, VS Code sync, Docker Desktop
 - [ ] Auth the AI CLIs: `claude`, `codex`, `gemini`, `grok`
 - [ ] `gh auth login` (required by `puff build`)
