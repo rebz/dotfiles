@@ -35,13 +35,13 @@ Everything brew-managed is declared in the [`Brewfile`](Brewfile) — that file 
 
 **AI CLIs:** Claude Code, Codex, Gemini CLI (Nano Banana image gen lives inside Gemini), CodexBar; Grok Build via npm
 
-**Apps (casks):** iTerm2, Docker Desktop, VS Code, Cursor, Alfred, Google Chrome, Firefox, Edge, TablePlus, Sketch, Spotify, Flux, Tailscale, PrivateVPN, OpenVPN Connect, ngrok, VLC, OBS, Blender, Creality Print, Creality Slicer, UltiMaker Cura
+**Apps (casks):** iTerm2, Docker Desktop, VS Code, Cursor, Alfred, Google Chrome, Firefox, Edge, TablePlus, Postman, Sketch, Spotify, Flux, Tailscale, PrivateVPN, OpenVPN Connect, ngrok, VLC, OBS, Blender, Creality Print, Creality Slicer, UltiMaker Cura
 
 **App Store (via `mas`):** Bear, Fantastical, GIPHY Capture — requires being signed in to the App Store before running the install
 
 **Fonts:** Maple Mono NF (terminal font, wired into the iTerm2 profile)
 
-**Shell:** oh-my-zsh (`robbyrussell` theme), zsh-autosuggestions, zsh-nvm with `.nvmrc` auto-switching
+**Shell:** oh-my-zsh (`robbyrussell` theme), zsh-autosuggestions, zsh-syntax-highlighting, zsh-nvm with `.nvmrc` auto-switching
 
 The libpq/rclone/doctl/cocoapods/Docker picks exist to support puffrate.com's infrastructure (Docker Compose stack, DigitalOcean droplet + DOCR, Cloudflare R2 backups, `puff` CLI, iOS app).
 

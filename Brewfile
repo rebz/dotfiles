@@ -46,6 +46,7 @@ cask "google-chrome"
 cask "firefox"
 cask "microsoft-edge"
 cask "tableplus"
+cask "postman"
 cask "sketch"
 cask "spotify"
 cask "flux-app"        # f.lux (brew renamed the old "flux" cask)
