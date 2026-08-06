@@ -32,7 +32,7 @@ brew "dive"        # inspect Docker image layers/bloat
 ### AI / Agentic CLIs
 #################################################################
 
-brew "codex"        # OpenAI Codex CLI
+cask "codex"        # OpenAI Codex CLI
 brew "gemini-cli"   # Google Gemini (incl. Nano Banana image gen)
 cask "claude-code"  # Claude Code
 cask "codexbar"     # menu-bar agent usage monitor (M-series only)
