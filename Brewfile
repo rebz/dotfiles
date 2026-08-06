@@ -56,7 +56,7 @@ cask "sketch"
 cask "spotify"
 cask "flux-app"        # f.lux (brew renamed the old "flux" cask)
 cask "tailscale-app"   # brew renamed the old "tailscale" cask
-cask "privatevpn"
+# privatevpn cask disabled upstream 2026-01-07 — install manually from privatevpn.com
 cask "openvpn-connect"
 cask "ngrok"
 cask "vlc"
