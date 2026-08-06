@@ -75,7 +75,8 @@ echo "Wrote $ZIP ($(du -h "$ZIP" | cut -f1 | tr -d ' '))"
 # Alfred prefs into the repo if changed").
 ALFRED_SRC="$HOME/Dropbox/Alfred/Alfred.alfredpreferences"
 if [ -d "$ALFRED_SRC" ]; then
-    rsync -a --delete --exclude '.DS_Store' "$ALFRED_SRC/" "$DOTFILES/alfred/Alfred.alfredpreferences/"
+    rsync -a --delete --delete-excluded --exclude '.DS_Store' --exclude '*conflicted copy*' \
+        "$ALFRED_SRC/" "$DOTFILES/alfred/Alfred.alfredpreferences/"
     if git -C "$DOTFILES" status --porcelain alfred/ | grep -q .; then
         echo "Alfred snapshot updated in alfred/ — commit and push it."
     else
