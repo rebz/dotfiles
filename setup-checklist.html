@@ -99,21 +99,18 @@
 
   <h2>Before leaving the old Mac <span class="count" data-count></span></h2>
   <ul class="checklist" data-section>
-    <li><label><input type="checkbox" data-id="old-env"><span class="item-text">Copy <code>~/.dotfiles/.env</code> somewhere safe<small>Git-ignored — holds PUFFRATE_MCP + QX tokens. AirDrop / USB, not cloud paste.</small></span></label></li>
-    <li><label><input type="checkbox" data-id="old-rclone"><span class="item-text">Copy <code>~/.dotfiles/rclone/rclone.conf</code><small>Git-ignored — Cloudflare R2 keys for puffrate backups.</small></span></label></li>
-    <li><label><input type="checkbox" data-id="old-ssh"><span class="item-text">Copy SSH keys from <code>~/.ssh</code><small>puffrate-droplet, qx-cjohnson-Bitbucket, rebz-GitHub (+ any others).</small></span></label></li>
-    <li><label><input type="checkbox" data-id="old-alfred"><span class="item-text">Re-snapshot Alfred prefs into the repo if changed<small>Old Mac syncs Alfred via Dropbox; repo copy is a snapshot. Re-copy <code>~/Dropbox/Alfred/Alfred.alfredpreferences</code> → <code>alfred/</code> and push if it drifted.</small></span></label></li>
-    <li><label><input type="checkbox" data-id="old-vpn"><span class="item-text">Export OpenVPN profiles (.ovpn) + note PrivateVPN login<small>Keep .ovpn files out of the repo — they can embed keys.</small></span></label></li>
-    <li><label><input type="checkbox" data-id="old-tableplus"><span class="item-text">Export TablePlus connections (or enable its iCloud sync)<small>Connections + license key don't travel via the cask.</small></span></label></li>
-    <li><label><input type="checkbox" data-id="old-3dprint"><span class="item-text">Optional: back up Cura / Creality printer profiles<small>Live in <code>~/Library/Application Support</code>; only if you've dialed in profiles you care about.</small></span></label></li>
+    <li><label><input type="checkbox" data-id="old-backup"><span class="item-text">Run <code>scripts/backup-env.sh</code><small>Zips <code>~/.ssh</code>, <code>.env</code>, <code>rclone.conf</code>, TablePlus connections and .ovpn profiles into <code>macbook-env-backup.zip</code> at the repo root (git-ignored). Add <code>--with-printing</code> for Cura/Creality profiles.</small></span></label></li>
+    <li><label><input type="checkbox" data-id="old-alfred"><span class="item-text">Commit <code>alfred/</code> if the script reports drift<small>backup-env.sh re-snapshots <code>~/Dropbox/Alfred/Alfred.alfredpreferences</code> → <code>alfred/</code>; Alfred travels via the repo, not the zip.</small></span></label></li>
+    <li><label><input type="checkbox" data-id="old-transfer"><span class="item-text">AirDrop / USB <code>macbook-env-backup.zip</code> to the new Mac<small>Not cloud — it holds SSH keys + API tokens.</small></span></label></li>
+    <li><label><input type="checkbox" data-id="old-vpn"><span class="item-text">Note your PrivateVPN login<small>The .ovpn files are in the zip; the login isn't a file.</small></span></label></li>
   </ul>
 
   <h2>On the new Mac — before bootstrap <span class="count" data-count></span></h2>
   <ul class="checklist" data-section>
     <li><label><input type="checkbox" data-id="new-icloud"><span class="item-text">Sign in to iCloud and the App Store<small>Required before bootstrap — <code>mas</code> installs (Bear, Fantastical, GIPHY Capture, Xcode) fail signed-out.</small></span></label></li>
-    <li><label><input type="checkbox" data-id="new-sshrestore"><span class="item-text">Restore SSH keys to <code>~/.ssh</code>, then <code>chmod 600</code> them<small>Needed before the git clone over SSH.</small></span></label></li>
+    <li><label><input type="checkbox" data-id="new-sshrestore"><span class="item-text">Unzip <code>macbook-env-backup.zip</code>; copy <code>ssh/</code> → <code>~/.ssh</code>, then <code>chmod 600</code> the keys<small>Needed before the git clone over SSH. restore-env.sh re-fixes permissions later.</small></span></label></li>
     <li><label><input type="checkbox" data-id="new-clone"><span class="item-text">Clone the repo: <code>git clone git@github.com:rebz/dotfiles.git ~/.dotfiles</code><small>First git run triggers the Xcode CLT prompt — accept it.</small></span></label></li>
-    <li><label><input type="checkbox" data-id="new-secrets"><span class="item-text">Drop secrets in place: <code>.env</code> → repo root, <code>rclone.conf</code> → <code>rclone/</code></span></label></li>
+    <li><label><input type="checkbox" data-id="new-secrets"><span class="item-text">Move <code>macbook-env-backup.zip</code> into <code>~/.dotfiles</code> and run <code>scripts/restore-env.sh</code><small>Installs <code>.env</code>, <code>rclone.conf</code>, SSH permissions, TablePlus connections, .ovpn files → <code>~/Documents</code>.</small></span></label></li>
     <li><label><input type="checkbox" data-id="new-bootstrap"><span class="item-text">Run <code>~/.dotfiles/bootstrap</code><small>Xcode via mas is ~12GB — let it run. Watch for the CLT pause near the start.</small></span></label></li>
     <li><label><input type="checkbox" data-id="new-defaults"><span class="item-text">Run <code>~/.dotfiles/osx/set-defaults.sh</code>, then log out/in<small>Finder/Dock tweaks + releases ⌘Space from Spotlight for Alfred.</small></span></label></li>
   </ul>
@@ -124,8 +121,8 @@
     <li><label><input type="checkbox" data-id="auth-ai"><span class="item-text">Auth the AI CLIs: <code>claude</code>, <code>codex</code>, <code>gemini</code>, <code>grok</code></span></label></li>
     <li><label><input type="checkbox" data-id="auth-apps"><span class="item-text">Sign in: Tailscale, Docker Desktop, Chrome, Spotify, VS Code sync</span></label></li>
     <li><label><input type="checkbox" data-id="auth-alfred"><span class="item-text">Alfred: enter Powerpack license, confirm ⌘Space opens Alfred<small>Prefs/workflows restore automatically from <code>alfred/</code> via syncfolder.</small></span></label></li>
-    <li><label><input type="checkbox" data-id="auth-vpn"><span class="item-text">Re-import .ovpn profiles; sign in to PrivateVPN</span></label></li>
-    <li><label><input type="checkbox" data-id="auth-tableplus"><span class="item-text">TablePlus: license key + import connections</span></label></li>
+    <li><label><input type="checkbox" data-id="auth-vpn"><span class="item-text">Import the .ovpn files from <code>~/Documents</code> into OpenVPN Connect; sign in to PrivateVPN</span></label></li>
+    <li><label><input type="checkbox" data-id="auth-tableplus"><span class="item-text">TablePlus: enter license key<small>Connections were restored by restore-env.sh.</small></span></label></li>
   </ul>
 
   <h2>After install — verify &amp; finish <span class="count" data-count></span></h2>
