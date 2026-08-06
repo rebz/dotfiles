@@ -108,3 +108,4 @@ LocalValetDriver.php
 .env
 .env.*
 LocalValetDriver.php
+**/.claude/settings.local.json

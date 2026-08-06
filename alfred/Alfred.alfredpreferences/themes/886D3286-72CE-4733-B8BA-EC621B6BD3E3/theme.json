@@ -1,0 +1,61 @@
+{
+  "alfredtheme" : {
+    "result" : {
+      "textSpacing" : 8,
+      "subtext" : {
+        "size" : 11,
+        "colorSelected" : "#FFC543FF",
+        "font" : "Helvetica",
+        "color" : "#C2C2C2FF"
+      },
+      "shortcut" : {
+        "size" : 16,
+        "colorSelected" : "#FFC543FF",
+        "font" : "Helvetica",
+        "color" : "#909090FF"
+      },
+      "backgroundSelected" : "#1A4660FF",
+      "text" : {
+        "size" : 24,
+        "colorSelected" : "#FFFFFFFF",
+        "font" : "Helvetica",
+        "color" : "#A6A6A6FF"
+      },
+      "iconPaddingHorizontal" : 5,
+      "paddingVertical" : 8,
+      "iconSize" : 40
+    },
+    "search" : {
+      "paddingVertical" : 2,
+      "background" : "#1D455FFF",
+      "spacing" : 10,
+      "text" : {
+        "size" : 36,
+        "colorSelected" : "#000000FF",
+        "font" : "Helvetica",
+        "color" : "#FFC543FF"
+      },
+      "backgroundSelected" : "#B5D5FFFF"
+    },
+    "window" : {
+      "color" : "#173346FF",
+      "paddingHorizontal" : 10,
+      "width" : 680,
+      "borderPadding" : 10,
+      "borderColor" : "#1733469E",
+      "blur" : 0,
+      "roundness" : 12,
+      "paddingVertical" : 10
+    },
+    "credit" : "Wes Bos",
+    "separator" : {
+      "color" : "#163447FF",
+      "thickness" : 1
+    },
+    "scrollbar" : {
+      "color" : "#D5D5D5FF",
+      "thickness" : 2
+    },
+    "name" : "Cobalt2 (v2)"
+  }
+}

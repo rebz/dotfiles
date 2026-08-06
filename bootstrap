@@ -2,7 +2,8 @@
 
 function bootstrapTerminal() {
     sudo -v
-	source ~/.dotfiles/installscript
+    # shellcheck source=installscript
+    source ~/.dotfiles/installscript
 }
 
 echo 'Bootstrap terminal'

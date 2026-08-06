@@ -5,74 +5,7 @@
 # Hide "last login" line when starting a new terminal session
 touch $HOME/.hushlogin
 
-
-
-###############################################################################
-# Screen                                                                      #
-###############################################################################
-
-# Require password immediately after sleep or screen saver begins
-#defaults write com.apple.screensaver askForPassword -int 1
-#defaults write com.apple.screensaver askForPasswordDelay -int 0
-
-# Save screenshots to the desktop
-defaults write com.apple.screencapture location -string "$HOME/Desktop"
-
-# Save screenshots in PNG format (other options: BMP, GIF, JPG, PDF, TIFF)
-defaults write com.apple.screencapture type -string "png"
-
-
-
-###############################################################################
-# Finder                                                                      #
-###############################################################################
-
-# Finder: disable window animations and Get Info animations
-defaults write com.apple.finder DisableAllAnimations -bool true
-
-# Finder: show path bar
-defaults write com.apple.finder ShowPathbar -bool true
-
-# Finder: allow text selection in Quick Look
-defaults write com.apple.finder QLEnableTextSelection -bool true
-
-# Finder: show hidden files by default
-defaults write com.apple.finder AppleShowAllFiles -bool true
-
-# Finder: show all filename extensions
-defaults write NSGlobalDomain AppleShowAllExtensions -bool true
-
-# Avoid creating .DS_Store files on network volumes
-defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
-
-# Enable snap-to-grid for icons on the desktop and in other icon views
-/usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
-/usr/libexec/PlistBuddy -c "Set :FK_StandardViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
-/usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
-
-
-
-###############################################################################
-# Dock, Dashboard, and hot corners                                            #
-###############################################################################
-
-# Don’t animate opening applications from the Dock
-defaults write com.apple.dock launchanim -bool false
-
-# Speed up Mission Control animations
-defaults write com.apple.dock expose-animation-duration -float 0.1
-
-# Don’t automatically rearrange Spaces based on most recent use
-defaults write com.apple.dock mru-spaces -bool false
-
-# Remove the auto-hiding Dock delay
-defaults write com.apple.dock autohide-delay -float 0
-
-# Remove the animation when hiding/showing the Dock
-defaults write com.apple.dock autohide-time-modifier -float 0
-
-# Automatically hide and show the Dock
-defaults write com.apple.dock autohide -bool true
+# macOS defaults (Finder, Dock, screenshots, power) live in osx/set-defaults.sh
 
 
 
@@ -83,16 +16,8 @@ defaults write com.apple.dock autohide -bool true
 echo 'install xcode command line tools'
 echo '-----------------'
 xcode-select --install
-
-
-
-#################################################################
-### Mac OS Mojave Required Libraries for below
-#################################################################
-
-#echo 'install Mojave missing libraries'
-#echo '-----------------'
-# brew install openldap libiconv
+echo 'If a dialog appeared, finish installing Command Line Tools before continuing.'
+read -p 'Press enter to continue...'
 
 
 
@@ -100,36 +25,28 @@ xcode-select --install
 ### GIT
 #################################################################
 
-# global gitigore
+# symlink git config + global gitignore (gitconfig sets excludesfile)
 ln -s $HOME/.dotfiles/shell/.gitignore_global $HOME/.gitignore_global
 ln -s $HOME/.dotfiles/shell/.gitconfig $HOME/.gitconfig
-git config --global core.excludesfile $HOME/.global-gitignore
-clear
-
-# global git config setup
-git config --global core.autocrlf true
-git config --global user.email myemail@domain.com
-# git config --global core.excludesfile $HOME/.global-gitignore
 
 
 #################################################################
 ### ZSH
 #################################################################
 
-# install zsh
-echo 'install oh-my-zhs'
+# install oh-my-zsh (RUNZSH/CHSH keep the installer from hijacking this script)
+echo 'install oh-my-zsh'
 echo '-----------------'
 rm -rf $HOME/.oh-my-zsh
-curl -L http://install.ohmyz.sh | sh
-sudo git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions
-# sudo git clone https://github.com/denysdovhan/spaceship-prompt.git "$ZSH_CUSTOM/themes/spaceship-prompt"
+RUNZSH=no CHSH=no sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+git clone https://github.com/zsh-users/zsh-autosuggestions $HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+git clone https://github.com/zsh-users/zsh-syntax-highlighting $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+git clone https://github.com/zsh-users/zsh-history-substring-search $HOME/.oh-my-zsh/custom/plugins/zsh-history-substring-search
+git clone https://github.com/zsh-users/zsh-completions $HOME/.oh-my-zsh/custom/plugins/zsh-completions
 
 # symlink zsh prefs
-rm $HOME/.zshrc
+rm -f $HOME/.zshrc
 ln -s $HOME/.dotfiles/shell/.zshrc $HOME/.zshrc
-
-# copy spaceship theme over
-# sudo ln -s "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" "$ZSH_CUSTOM/themes/spaceship.zsh-theme" # TODO - this does not appear to copy over
 
 
 
@@ -139,31 +56,69 @@ ln -s $HOME/.dotfiles/shell/.zshrc $HOME/.zshrc
 
 echo 'install homebrew'
 echo '----------------'
-echo install homebrew
-sudo rm -rf /usr/local/Cellar /usr/local/.git && brew cleanup
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
+# make brew usable in this shell (Apple Silicon)
+eval "$(/opt/homebrew/bin/brew shellenv)"
 
-
-echo 'install wget'
+echo 'install packages from Brewfile'
 echo '----------------'
-echo install wget
-brew install wget
+brew trust ngrok/ngrok 2>/dev/null || true
+brew trust steipete/tap 2>/dev/null || true
+brew bundle --file="$HOME/.dotfiles/Brewfile"
 
-# TODO :: does this exist any longer?
-# echo 'Install brew-cask'
-# echo '-----------------'
-# brew tap homebrew/cask
-# brew install brew-cask
 
 
 #################################################################
-### Sequel Pro
+### iTerm2 profile (Maple Mono NF font)
 #################################################################
 
-# echo 'install sequel pro nightly'
-# echo '---------------'
-# brew cask install homebrew/cask-versions/sequel-pro-nightly
+echo 'install iTerm2 dynamic profile'
+echo '----------------'
+mkdir -p "$HOME/Library/Application Support/iTerm2/DynamicProfiles"
+cp "$HOME/.dotfiles/iterm2/dotfiles-profile.json" "$HOME/Library/Application Support/iTerm2/DynamicProfiles/"
+# make it the default profile (guid must match iterm2/dotfiles-profile.json)
+defaults write com.googlecode.iterm2 "Default Bookmark Guid" -string "d07f11e5-0000-4000-8000-000000000001"
+
+
+
+#################################################################
+### Alfred preferences
+#################################################################
+
+# point Alfred's sync at the repo snapshot — restores workflows, themes,
+# and the ⌘Space hotkey (Spotlight's ⌘Space is disabled in osx/set-defaults.sh)
+echo 'configure Alfred preferences sync'
+echo '----------------'
+# shellcheck disable=SC2088  # literal tilde is intentional: Alfred stores this pref tilde-relative
+defaults write com.runningwithcrayons.Alfred-Preferences syncfolder "~/.dotfiles/alfred"
+echo 'NOTE: re-enter your Alfred Powerpack license manually (not stored in repo)'
+
+
+
+#################################################################
+### Editor settings (VS Code + Cursor share vscode/)
+#################################################################
+
+echo 'link shared editor settings'
+echo '----------------'
+bash "$HOME/.dotfiles/scripts/link-editor-settings.sh"
+
+
+
+#################################################################
+### rclone config
+#################################################################
+
+# real config is gitignored (holds R2 credentials) — copy it from the old
+# machine into ~/.dotfiles/rclone/rclone.conf alongside .env
+if [ -f "$HOME/.dotfiles/rclone/rclone.conf" ]; then
+    mkdir -p "$HOME/.config/rclone"
+    ln -sfn "$HOME/.dotfiles/rclone/rclone.conf" "$HOME/.config/rclone/rclone.conf"
+    echo 'rclone config linked'
+else
+    echo 'rclone: no rclone/rclone.conf found — copy it from the old machine or run `rclone config` (see rclone/rclone.conf.example)'
+fi
 
 
 
@@ -171,97 +126,26 @@ brew install wget
 ### Node
 #################################################################
 
-# install nvm
-echo 'install NVM'
-echo '...then `nvm install 14.19.0`'
-echo '...then install zsh nvm plugin'
+echo 'install NVM + Node 24.19.0 LTS'
 echo '---------------'
-curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.39.1/install.sh | bash
-nvm install 14.19.0
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+nvm install 24.19.0
+nvm alias default 24.19.0
 git clone https://github.com/lukechilds/zsh-nvm ~/.oh-my-zsh/custom/plugins/zsh-nvm
 
+# Grok Build (xAI) — no brew package; official npm distribution
+npm install -g @xai-official/grok
 
-
-#################################################################
-### Other
-#################################################################
-
-# TODO :: look info
-# install finder quicklook plugins
-# echo 'install finder quicklook plugins'
-# echo '-----------------------------------'
-# brew cask install --force qlcolorcode qlstephen qlmarkdown quicklook-json qlprettypatch quicklook-csv betterzipql webp-quicklook suspicious-package
-
-# dos2unix
-echo 'install dos2unix'
-echo '------------'
-brew install dos2unix
-
-echo 'install iterm2'
-brew install --cask iterm2
-
-echo 'install ngrok'
-brew install ngrok/ngrok/ngrok
-
-echo 'install sourcetree'
-brew install --cask sourcetree
-
-echo 'install sketch'
-brew install --cask sketch
-
-echo 'install vscode'
-brew install --cask visual-studio-code
-
-echo 'install yarn'
-brew install yarn
-
-echo 'install fire code font for terminal'
-brew tap homebrew/cask-fonts
-brew install --cask font-fira-code
-
-echo 'install flux'
-brew install --cask flux
-
-echo 'install spotify'
-brew install --cask spotify
-
-
-#################################################################
-### Mobile Access (used by `mobile` function in .functions)
-#################################################################
-
-echo 'install tmux'
-brew install tmux
-
-echo 'install tailscale'
-brew install --cask tailscale
-
-
-#################################################################
-### Agentic Tools
-#################################################################
-
-echo 'install codexbar: monitor agentic usage'
-echo 'FAILURE TO INSTALL "codexbar": requires an M-series chip'
-# brew install --cask steipete/tap/codexbar
+# Ionic CLI for puffrate native/ iOS work
+npm install -g @ionic/cli
 
 
 
 #################################################################
-### Cleanup
+### Done
 #################################################################
-
-echo 'fixing ZSH'
-echo '------------'
-
-cd ~/.oh-my-zsh
-
-git config core.autocrlf input
-git rm --cached -r .
-git reset --hard
-
-dos2unix ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
-dos2unix ~/.oh-my-zsh/custom/plugins/zsh-nvm/zsh-nvm.plugin.zsh
 
 echo '++++++++++++++++++++++++++++++'
 echo '++++++++++++++++++++++++++++++'
@@ -272,9 +156,6 @@ echo 'Some optional tidbits'
 
 echo '1. set some sensible os x defaults by running: $HOME/.dotfiles/osx/set-defaults.sh'
 echo '2. make a .dotfiles-custom/shell/.(exports,aliases,functions,zshrc) for your personal commands'
-
-echo '++++++++++++++++++++++++++++++'
-echo 'Sometimes ZSH has issues with line endings after installing. Just copy the error and paste into their issues https://github.com/robbyrussell/oh-my-zsh/issues'
 
 echo '++++++++++++++++++++++++++++++'
 echo 'Please report issues!'

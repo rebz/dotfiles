@@ -1,0 +1,61 @@
+{
+  "alfredtheme" : {
+    "result" : {
+      "textSpacing" : 4,
+      "subtext" : {
+        "size" : 11,
+        "colorSelected" : "#FFFFFF96",
+        "font" : "Lucida Grande",
+        "color" : "#FFFFFF3D"
+      },
+      "shortcut" : {
+        "size" : 16,
+        "colorSelected" : "#AAAAAAFF",
+        "font" : "Lucida Grande",
+        "color" : "#FFFFFFFF"
+      },
+      "backgroundSelected" : "#0A0A0ACC",
+      "text" : {
+        "size" : 13,
+        "colorSelected" : "#FFFFFFFF",
+        "font" : "Lucida Grande",
+        "color" : "#E7E7E7FF"
+      },
+      "iconPaddingHorizontal" : 5,
+      "paddingVertical" : 0,
+      "iconSize" : 40
+    },
+    "search" : {
+      "paddingVertical" : 2,
+      "background" : "#56555700",
+      "spacing" : 10,
+      "text" : {
+        "size" : 36,
+        "colorSelected" : "#000000FF",
+        "font" : "Helvetica",
+        "color" : "#FFFFFFFF"
+      },
+      "backgroundSelected" : "#B2D7FFFF"
+    },
+    "window" : {
+      "color" : "#191D2ED8",
+      "paddingHorizontal" : 10,
+      "width" : 560,
+      "borderPadding" : 10,
+      "borderColor" : "#19191900",
+      "blur" : 0,
+      "roundness" : 0,
+      "paddingVertical" : 10
+    },
+    "credit" : "Jeremy Bunting",
+    "separator" : {
+      "color" : "#FFFFFF00",
+      "thickness" : 1
+    },
+    "scrollbar" : {
+      "color" : "#00FA00FF",
+      "thickness" : 2
+    },
+    "name" : "Smoked (v2)"
+  }
+}

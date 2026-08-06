@@ -1,21 +1,13 @@
 [core]
-	excludesfile = /Users/cjohnson/.gitignore_global
+	excludesfile = ~/.gitignore_global
 	autocrlf = input
 [user]
 	email = chris@rebzmedia.com
 	name = Chris Johnson
-[difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
-[mergetool "sourcetree"]
-	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-	trustExitCode = true
-[commit]
-	template = /Users/cjohnson/.stCommitMsg
 [credential]
 	helper = osxkeychain
 [rebase]
-	enabled = true
+	autoStash = true
 [rerere]
 	enabled = true
 [diff]

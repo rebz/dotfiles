@@ -1,7 +1,5 @@
-# ssh-add -K ~/.ssh/id_rsa
-
 #################################################################
-### OS Helpers
+### Agents
 #################################################################
 
 alias claudey="claude --dangerously-skip-permissions"
@@ -16,6 +14,9 @@ alias hosts="sudo vi /etc/hosts"
 
 # List all files colorized in long format
 alias l="ls -laF"
+
+# Always colorize grep (GREP_OPTIONS env var is deprecated)
+alias grep="grep --color=auto"
 
 # Show/hide hidden files in Finder
 alias show="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
@@ -60,57 +61,8 @@ alias gl="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %
 
 
 #################################################################
-### Composer
-#################################################################
-
-# alias outdated="composer outdated"
-# alias check='php ~/.composer/vendor/sensiolabs/security-checker/./security-checker security:check composer.lock'
-
-
-
-#################################################################
-### Laravel Helpers
-#################################################################
-
-# alias art="php artisan"
-# alias fresh="php artisan migrate:fresh --seed"
-
-#### Valet
-# Share with ngrok
-# alias share="valet share"
-
-#### Testing
-# alias dusk="php artisan dusk"
-# alias t="./vendor/bin/phpunit"
-# alias tf="./vendor/bin/phpunit --filter"
-# alias j="npm run test"
-# alias jf="npm run test -- -t"
-
-#### Webpack
-# alias dev="npm run dev"
-# alias hot="npm run hot"
-# alias watch="npm run watch"
-# alias prod="npm run production"
-
-#### Workers
-# alias srun="while true; do php artisan schedule:run; sleep 60; done;"
-# alias retry="php artisan queue:retry all"
-# alias work="php artisan queue:work --tries=1"
-
-#### Homestead
-# alias vm="ssh vagrant@127.0.0.1 -p 2222"
-# alias homestead='function __homestead() { (cd ~/Homestead && vagrant $*); unset -f __homestead; }; __homestead'
-
-#### LaRoute Generator
-# alias routes="php artisan laroute:generate"
-
-
-#################################################################
 ### Random
 #################################################################
-
-# Brew Helpers
-# alias rmbrew="brew list | xargs brew rm"
 
 # Export CSV of current
 alias glog="git log --date=iso --pretty=format:'"%h","%an","%ad","%s"' > log.csv"

@@ -3,17 +3,9 @@
 #################################################################
 
 #import ssh keys in keychain
-ssh-add -K ~/.ssh/puffrate-droplet 2>/dev/null
-ssh-add -K ~/.ssh/qx-cjohnson-Bitbucket 2>/dev/null
-ssh-add -K ~/.ssh/rebz-GitHub 2>/dev/null
-
-
-#################################################################
-### NativeScript Build
-#################################################################
-
-export LANG=en_US.UTF-8
-export SWIFT_VERSION=4
+ssh-add --apple-use-keychain ~/.ssh/puffrate-droplet 2>/dev/null
+ssh-add --apple-use-keychain ~/.ssh/qx-cjohnson-Bitbucket 2>/dev/null
+ssh-add --apple-use-keychain ~/.ssh/rebz-GitHub 2>/dev/null
 
 
 #################################################################
@@ -42,9 +34,11 @@ DEFAULT_USER=`whoami`
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git zsh-nvm)
+# order matters: zsh-syntax-highlighting near-last, history-substring-search after it
+plugins=(git zsh-nvm docker docker-compose npm extract sudo z zsh-autosuggestions zsh-syntax-highlighting zsh-history-substring-search)
 
-# source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+# zsh-completions: extra completion defs go on fpath before compinit (not a normal plugin)
+fpath+="${ZSH_CUSTOM:-$ZSH/custom}/plugins/zsh-completions/src"
 
 
 
@@ -55,11 +49,6 @@ plugins=(git zsh-nvm)
 # Allow to use home and end in terminal
 bindkey  "^[[H"   beginning-of-line
 bindkey  "^[[F"   end-of-line
-
-export PATH="/usr/local/bin:$PATH"
-export PATH="/usr/local/bin/brew:$PATH"
-export PATH="/usr/local/Homebrew/bin:$PATH"
-export PATH="/opt/homebrew/bin:$PATH"
 
 #################################################################
 ### Load Aliases functions exports
@@ -83,20 +72,8 @@ unset file
 ### PATHS
 #################################################################
 
-PATH="/usr/local/bin:$PATH"
-PATH="/usr/local/sbin:$PATH"
-PATH="$PATH:$HOME/.composer/vendor/bin"
-
-export ANDROID_HOME=/usr/local/share/android-sdk
-
-
-
-#################################################################
-### PHP
-#################################################################
-
-# setup xdebug
-export XDEBUG_CONFIG="remote_enable=1 remote_mode=req remote_port=9001 remote_host=127.0.0.1 remote_connect_back=0"
+# Apple Silicon brew first, Intel-era /usr/local kept for the old machine
+export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/local/sbin:$PATH"
 
 
 
@@ -114,6 +91,10 @@ export NVM_AUTO_USE=true
 #################################################################
 
 source $ZSH/oh-my-zsh.sh
+
+# up/down arrows search history for what's already typed (history-substring-search)
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
@@ -146,26 +127,6 @@ load-nvmrc
 
 
 
-#################################################################
-### Qumulex
-#################################################################
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-# __conda_setup="$('/Users/cjohnson/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-# if [ $? -eq 0 ]; then
-#     eval "$__conda_setup"
-# else
-#     if [ -f "/Users/cjohnson/anaconda3/etc/profile.d/conda.sh" ]; then
-#         . "/Users/cjohnson/anaconda3/etc/profile.d/conda.sh"
-#     else
-#         export PATH="/Users/cjohnson/anaconda3/bin:$PATH"
-#     fi
-# fi
-# unset __conda_setup
-# <<< conda initialize <<<
-
-
 # pnpm
 export PNPM_HOME="/Users/cjohnson/Library/pnpm"
 case ":$PATH:" in
@@ -181,17 +142,89 @@ if [ -f '/Users/cjohnson/Code/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/c
 if [ -f '/Users/cjohnson/Code/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/cjohnson/Code/google-cloud-sdk/completion.zsh.inc'; fi
 
 # Created by `pipx` on 2024-11-24 22:25:06
-export PATH="$PATH:/Users/cjohnson/.local/bin"
-
-export PATH="/usr/local/bin/brew:$PATH"
-export PATH="/usr/local/Homebrew/bin:$PATH"
-export PATH="/opt/homebrew/bin:$PATH"
+export PATH="$PATH:$HOME/.local/bin"
 
 # used for pg_dump, verify db script for puffrate.com
 export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
 export PATH="/usr/local/opt/postgresql@17/bin:$PATH"
 
-export QX_NPM_TOKEN="1tj0nRo6MZQ6dLP0/Qw/lqRI13Tidi2gjJ5xk3uxWHaCoaXolKElrBpEAinF9nzWE8Y7mbeCjOmIFD498Nd+dw=="
 alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
 
 export DISABLE_AUTO_TITLE="true"
+export CLAUDE_TITLE_PREFIX="🤖"
+
+# Machine-local secrets (see .env.example)
+if [ -f "$HOME/.dotfiles/.env" ]; then
+  source "$HOME/.dotfiles/.env"
+  export PUFFRATE_MCP_TOKEN_LOCAL
+  export QX_NPM_TOKEN
+fi
+
+
+# ============================================================================
+# CLAUDE_TERMINAL_TITLE_SETUP - Terminal Title Skill Configuration
+# Added by terminal-title skill setup script
+# ============================================================================
+
+# Override macOS Terminal.app's update_terminal_cwd to preserve Claude titles
+update_terminal_cwd() {
+    local title_file="${HOME}/.claude/terminal_title"
+
+    if [ -f "$title_file" ]; then
+        local claude_title=$(cat "$title_file" 2>/dev/null)
+
+        if [ -n "$claude_title" ]; then
+            # Check if this shell session has already claimed a title
+            if [ -n "$CLAUDE_TITLE_CLAIMED" ]; then
+                # This session has claimed a title - use it indefinitely
+                printf '\033]0;%s\007' "$claude_title"
+                return
+            else
+                # New shell session - check if title is fresh (< 5 minutes)
+                local current_time=$(date +%s)
+                local file_time
+                
+                # Detect OS and use appropriate stat command
+                if [[ "$OSTYPE" == "darwin"* ]]; then
+                    file_time=$(stat -f %m "$title_file" 2>/dev/null)
+                elif [[ "$OSTYPE" == "linux-gnu"* ]] || [[ "$OSTYPE" == "linux"* ]]; then
+                    file_time=$(stat -c %Y "$title_file" 2>/dev/null)
+                else
+                    # Fallback: use find for modification time
+                    file_time=$(find "$title_file" -printf '%T@' 2>/dev/null | cut -d. -f1)
+                    if [[ -z "$file_time" ]]; then
+                        # Last resort: try ls -T (BSD) or ls --time-style (GNU)
+                        file_time=$(ls -T "$title_file" 2>/dev/null | awk '{print $6" "$7" "$8}' | xargs -I {} date -j -f "%b %d %H:%M:%S" "{}" +%s 2>/dev/null || \
+                                   ls -l --time-style=+%s "$title_file" 2>/dev/null | awk '{print $6}' 2>/dev/null)
+                    fi
+                fi
+                
+                # If we can't get file time, assume it's stale and skip
+                if [[ -z "$file_time" ]] || ! [[ "$file_time" =~ ^[0-9]+$ ]]; then
+                    # Fallback: show current directory
+                    printf '\033]0;%s\007' "${PWD/#$HOME/~}"
+                    return
+                fi
+                
+                local age=$((current_time - file_time))
+
+                if [ $age -lt 300 ]; then
+                    # Title is fresh - claim it for this shell session
+                    export CLAUDE_TITLE_CLAIMED=1
+                    printf '\033]0;%s\007' "$claude_title"
+                    return
+                fi
+            fi
+        fi
+    fi
+
+    # Fallback: show current directory
+    printf '\033]0;%s\007' "${PWD/#$HOME/~}"
+}
+
+# Make sure our override is called
+if [[ ! "${precmd_functions[(r)update_terminal_cwd]}" == "update_terminal_cwd" ]]; then
+    precmd_functions+=(update_terminal_cwd)
+fi
+
+# ============================================================================

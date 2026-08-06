@@ -1,0 +1,222 @@
+{
+  "editor.fontFamily": "Fira Code",
+  "editor.fontLigatures": true,
+  "editor.tabCompletion": "onlySnippets",
+  "workbench.colorTheme": "Cobalt2",
+  "workbench.iconTheme": "Monokai Pro Icons",
+  "emmet.includeLanguages": {
+    "html": "html",
+    "javascript": "javascript"
+  },
+  "eslint.validate": ["javascript", "javascriptreact", "javascriptvue", "vue"],
+  "breadcrumbs.enabled": true,
+  "colorInfo.languages": [
+    {
+      "selector": "sass",
+      "colors": ["css", "hex", "rgb"]
+    }
+  ],
+  // "vetur.format.options.tabSize": 4,
+  "eslint.validate": [
+    {
+      "language": "vue",
+      "autoFix": true
+    },
+    {
+      "language": "javascript",
+      "autoFix": true
+    },
+    {
+      "language": "javascriptreact",
+      "autoFix": true
+    }
+  ],
+  "eslint.autoFixOnSave": true,
+  "editor.formatOnSave": false,
+  "vetur.validation.template": false,
+  "editor.wordWrapColumn": 120,
+  "rewrap.wrappingColumn": 20,
+  "[html]": {
+    "editor.defaultFormatter": "vscode.html-language-features"
+  },
+  "sync.gist": "ca0ca53b39a7b40c633aa886f18d70a4",
+  "[javascript]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  },
+  "todohighlight": {
+    "isCaseSensitive": true,
+    "keywords": [
+      "DEBUG :: ",
+      "REVIEW :: ",
+      "NOTE :: ",
+      "DOC :: ",
+      "FIX :: ",
+      "TODO :: ",
+      // {
+      //     "text": "NOTE:",
+      //     "color": "#ff0000",
+      //     "backgroundColor": "yellow",
+      //     "overviewRulerColor": "grey"
+      // },
+      // {
+      //     "text": "HACK:",
+      //     "color": "#000",
+      //     "backgroundColor": "hsla(120,40%,40%,0.5)",
+      //     "isWholeLine": false,
+      // },
+      // {
+      //     "color": "red",
+      //     "border": "1px solid red",
+      //     "borderRadius": "2px", //NOTE: using borderRadius along with `border` or you will see nothing change
+      //     "backgroundColor": "rgba(0,0,0,.2)",
+      //     //other styling properties goes here ... 
+      // }
+    ],
+    "defaultStyle": {
+      "color": "hsla(204,50%,70%,1)",
+      "backgroundColor": "hsla(204,52%,15%,1)",
+      // "overviewRulerColor": "#ffab00",
+      "cursor": "pointer",
+      "borderRadius": "2px",
+      "isWholeLine": true,
+    },
+    "include": [
+      "**/*.js",
+      "**/*.jsx",
+      "**/*.ts",
+      "**/*.tsx",
+      "**/*.html",
+      "**/*.php",
+      "**/*.css",
+      "**/*.scss",
+    ],
+    "exclude": [
+      ".vscode/**",
+      "**/node_modules/**",
+      "**/dist/**",
+      "**/bower_components/**",
+      "**/build/**",
+      "**/.vscode/**",
+      "**/.github/**",
+      "**/_output/**",
+      "**/*.min.*",
+      "**/*.map",
+    ]
+  },
+  "javascript.implicitProjectConfig.experimentalDecorators": true,
+  "git.autofetch": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "never"
+  },
+  "cSpell.enableFiletypes": [
+    "vue"
+  ],
+  "cSpell.userWords": [
+    "lockdown"
+  ],
+  "workbench.startupEditor": "none",
+  "cssPeek.peekFromLanguages": [
+    "html",
+    "django-html",
+    "laravel-blade",
+    "razor",
+    "vue",
+    "blade",
+    "pug",
+    "jade",
+    "handlebars",
+    "php",
+    "twig",
+    "md",
+    "nunjucks",
+    "javascript",
+    "javascriptreact",
+    "erb",
+    "typescript",
+    "typescriptreact",
+    "HTML (Eex)",
+    "html-eex",
+    "ejs",
+    "scss"
+],
+  "redhat.telemetry.enabled": true,
+  // "[xml]": {
+  //   "editor.defaultFormatter": "redhat.vscode-xml"
+  // },
+  "editor.inlineSuggest.enabled": true,
+  "github.copilot.enable": {
+    "*": true,
+    "yaml": true,
+    "plaintext": true,
+    "markdown": true
+  },
+  "files.associations": {
+    ".env": "dotenv"
+  },
+  // "[vue]": {
+  //     "editor.defaultFormatter": "Vue.volar"
+  // },
+  // "[typescript]": {
+  //     "editor.defaultFormatter": "vscode.typescript-language-features"
+  // },
+  "bracket-pair-colorizer-2.depreciation-notice": false,
+  "terminal.integrated.fontFamily": "monospace",
+  // "[json]": {
+  //   "editor.defaultFormatter": "vscode.json-language-features"
+  // },
+  "[scss]": {
+    "editor.defaultFormatter": "sibiraj-s.vscode-scss-formatter"
+  },
+  "[css]": {
+    "editor.defaultFormatter": "sibiraj-s.vscode-scss-formatter"
+  },
+  // disable cursive font styling for certain scopes
+  "editor.tokenColorCustomizations": {
+    "textMateRules": [
+       {
+          "scope": [
+            "comment",
+            "comment.block",
+            "comment.block.documentation",
+            "comment.line",
+            "keyword.control",
+          ],
+          "settings": {
+             "fontStyle": ""
+          }
+       }   
+    ]
+},
+"npm.keybindingsChangedWarningShown": true,
+"apollographql.debug.revealOutputOnLanguageServerError": false,
+"typescript.updateImportsOnFileMove.enabled": "never",
+// "[typescriptreact]": {
+//   "editor.defaultFormatter": "vscode.typescript-language-features"
+// },
+"extensions.ignoreRecommendations": true,
+"window.zoomLevel": 2,
+"git.openRepositoryInParentFolders": "never",
+"vite.autoStart": false,
+"editor.defaultFormatter": "dbaeumer.vscode-eslint",
+// "[jsonc]": {
+//   "editor.defaultFormatter": "vscode.json-language-features"
+// },
+"eslint.format.enable": true,
+"eslint.nodePath": "./",
+"[jsonc]": {
+  "editor.defaultFormatter": "vscode.json-language-features"
+},
+"[vue]": {
+  "editor.defaultFormatter": "Vue.volar"
+},
+"[typescript]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+},
+"[json]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+},
+"github.copilot.nextEditSuggestions.enabled": true,
+"claudeCode.preferredLocation": "panel",
+"gitlens.ai.model": "vscode",
+"gitlens.ai.vscode.model": "copilot:gpt-4.1",
+}
