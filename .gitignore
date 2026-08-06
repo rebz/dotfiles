@@ -2,3 +2,5 @@
 !.env.example
 .DS_Store
 rclone/rclone.conf
+macbook-env-backup.zip
+macbook-env-backup.zip.bak
