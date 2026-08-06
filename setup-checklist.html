@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dotfiles — New Mac Setup Checklist</title>
+<style>
+  :root {
+    --bg: #f6f6f4; --surface: #ffffff; --ink: #24292f; --ink-soft: #5a6570;
+    --line: #dde1e5; --accent: #2f6fc4; --accent-soft: #e3edf9;
+    --done: #1c6b40; --danger: #b23a3a; --danger-soft: #f7e5e5;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #101418; --surface: #171d24; --ink: #d6dde4; --ink-soft: #8b96a1;
+      --line: #2a323b; --accent: #6aa5e8; --accent-soft: #1d2c3f;
+      --done: #6fd096; --danger: #e08585; --danger-soft: #3a2224;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font: 16px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  main { max-width: 720px; margin: 0 auto; padding: 48px 20px 96px; }
+  code {
+    font-family: "Maple Mono NF", "Maple Mono", ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 13.5px; background: var(--accent-soft); color: var(--accent);
+    padding: 1px 6px; border-radius: 4px;
+  }
+
+  header { border-bottom: 1px solid var(--line); padding-bottom: 20px; margin-bottom: 8px; }
+  .eyebrow {
+    font-size: 12px; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--accent); font-weight: 600; margin: 0 0 8px;
+  }
+  h1 { font-size: 28px; margin: 0 0 8px; letter-spacing: -.015em; }
+  header p { color: var(--ink-soft); margin: 0; max-width: 58ch; }
+
+  .toolbar {
+    position: sticky; top: 0; z-index: 5; background: var(--bg);
+    display: flex; align-items: center; gap: 16px;
+    padding: 14px 0; border-bottom: 1px solid var(--line); margin-bottom: 28px;
+  }
+  .progress-text { font-weight: 600; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .bar { flex: 1; height: 6px; background: var(--line); border-radius: 999px; overflow: hidden; }
+  .bar-fill { height: 100%; width: 0%; background: var(--accent); border-radius: 999px; transition: width .25s ease; }
+  #resetBtn {
+    font: 600 13px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    color: var(--danger); background: transparent; border: 1px solid var(--danger);
+    border-radius: 6px; padding: 8px 14px; cursor: pointer; white-space: nowrap;
+  }
+  #resetBtn:hover, #resetBtn:focus-visible { background: var(--danger-soft); }
+  #resetBtn.confirming { background: var(--danger); color: #fff; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  h2 {
+    font-size: 13px; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--ink-soft); font-weight: 600; margin: 36px 0 10px;
+    display: flex; align-items: baseline; gap: 10px;
+  }
+  h2 .count { font-weight: 500; letter-spacing: 0; text-transform: none; font-variant-numeric: tabular-nums; }
+  h2 .count.done { color: var(--done); }
+
+  ul.checklist { list-style: none; margin: 0; padding: 0; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; }
+  ul.checklist li { border-bottom: 1px solid var(--line); }
+  ul.checklist li:last-child { border-bottom: none; }
+  ul.checklist label {
+    display: flex; gap: 12px; align-items: flex-start;
+    padding: 12px 16px; cursor: pointer;
+  }
+  ul.checklist label:hover { background: color-mix(in srgb, var(--accent-soft) 40%, transparent); }
+  ul.checklist input[type="checkbox"] {
+    flex: none; width: 18px; height: 18px; margin: 3px 0 0; accent-color: var(--accent); cursor: pointer;
+  }
+  .item-text { min-width: 0; }
+  .item-text small { display: block; color: var(--ink-soft); font-size: 13.5px; margin-top: 1px; overflow-wrap: break-word; }
+  li.checked .item-text { text-decoration: line-through; text-decoration-color: var(--ink-soft); color: var(--ink-soft); }
+  li.checked .item-text code { opacity: .65; }
+
+  footer { color: var(--ink-soft); font-size: 13.5px; margin-top: 40px; }
+  @media (prefers-reduced-motion: reduce) { .bar-fill { transition: none; } }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <p class="eyebrow">~/.dotfiles</p>
+    <h1>New Mac Setup Checklist</h1>
+    <p>Everything the scripts can't do for you. Progress is saved in this browser (localStorage) — safe to close and come back.</p>
+  </header>
+
+  <div class="toolbar">
+    <span class="progress-text" id="progressText">0 / 0</span>
+    <div class="bar" aria-hidden="true"><div class="bar-fill" id="progressFill"></div></div>
+    <button id="resetBtn" type="button">Reset checklist</button>
+  </div>
+
+  <h2>Before leaving the old Mac <span class="count" data-count></span></h2>
+  <ul class="checklist" data-section>
+    <li><label><input type="checkbox" data-id="old-env"><span class="item-text">Copy <code>~/.dotfiles/.env</code> somewhere safe<small>Git-ignored — holds PUFFRATE_MCP + QX tokens. AirDrop / USB, not cloud paste.</small></span></label></li>
+    <li><label><input type="checkbox" data-id="old-rclone"><span class="item-text">Copy <code>~/.dotfiles/rclone/rclone.conf</code><small>Git-ignored — Cloudflare R2 keys for puffrate backups.</small></span></label></li>
+    <li><label><input type="checkbox" data-id="old-ssh"><span class="item-text">Copy SSH keys from <code>~/.ssh</code><small>puffrate-droplet, qx-cjohnson-Bitbucket, rebz-GitHub (+ any others).</small></span></label></li>
+    <li><label><input type="checkbox" data-id="old-alfred"><span class="item-text">Re-snapshot Alfred prefs into the repo if changed<small>Old Mac syncs Alfred via Dropbox; repo copy is a snapshot. Re-copy <code>~/Dropbox/Alfred/Alfred.alfredpreferences</code> → <code>alfred/</code> and push if it drifted.</small></span></label></li>
+    <li><label><input type="checkbox" data-id="old-vpn"><span class="item-text">Export OpenVPN profiles (.ovpn) + note PrivateVPN login<small>Keep .ovpn files out of the repo — they can embed keys.</small></span></label></li>
+    <li><label><input type="checkbox" data-id="old-tableplus"><span class="item-text">Export TablePlus connections (or enable its iCloud sync)<small>Connections + license key don't travel via the cask.</small></span></label></li>
+    <li><label><input type="checkbox" data-id="old-3dprint"><span class="item-text">Optional: back up Cura / Creality printer profiles<small>Live in <code>~/Library/Application Support</code>; only if you've dialed in profiles you care about.</small></span></label></li>
+  </ul>
+
+  <h2>On the new Mac — before bootstrap <span class="count" data-count></span></h2>
+  <ul class="checklist" data-section>
+    <li><label><input type="checkbox" data-id="new-icloud"><span class="item-text">Sign in to iCloud and the App Store<small>Required before bootstrap — <code>mas</code> installs (Bear, Fantastical, GIPHY Capture, Xcode) fail signed-out.</small></span></label></li>
+    <li><label><input type="checkbox" data-id="new-sshrestore"><span class="item-text">Restore SSH keys to <code>~/.ssh</code>, then <code>chmod 600</code> them<small>Needed before the git clone over SSH.</small></span></label></li>
+    <li><label><input type="checkbox" data-id="new-clone"><span class="item-text">Clone the repo: <code>git clone git@github.com:rebz/dotfiles.git ~/.dotfiles</code><small>First git run triggers the Xcode CLT prompt — accept it.</small></span></label></li>
+    <li><label><input type="checkbox" data-id="new-secrets"><span class="item-text">Drop secrets in place: <code>.env</code> → repo root, <code>rclone.conf</code> → <code>rclone/</code></span></label></li>
+    <li><label><input type="checkbox" data-id="new-bootstrap"><span class="item-text">Run <code>~/.dotfiles/bootstrap</code><small>Xcode via mas is ~12GB — let it run. Watch for the CLT pause near the start.</small></span></label></li>
+    <li><label><input type="checkbox" data-id="new-defaults"><span class="item-text">Run <code>~/.dotfiles/osx/set-defaults.sh</code>, then log out/in<small>Finder/Dock tweaks + releases ⌘Space from Spotlight for Alfred.</small></span></label></li>
+  </ul>
+
+  <h2>After install — sign-ins &amp; auth <span class="count" data-count></span></h2>
+  <ul class="checklist" data-section>
+    <li><label><input type="checkbox" data-id="auth-gh"><span class="item-text"><code>gh auth login</code><small>Required by <code>puff build</code>.</small></span></label></li>
+    <li><label><input type="checkbox" data-id="auth-ai"><span class="item-text">Auth the AI CLIs: <code>claude</code>, <code>codex</code>, <code>gemini</code>, <code>grok</code></span></label></li>
+    <li><label><input type="checkbox" data-id="auth-apps"><span class="item-text">Sign in: Tailscale, Docker Desktop, Chrome, Spotify, VS Code sync</span></label></li>
+    <li><label><input type="checkbox" data-id="auth-alfred"><span class="item-text">Alfred: enter Powerpack license, confirm ⌘Space opens Alfred<small>Prefs/workflows restore automatically from <code>alfred/</code> via syncfolder.</small></span></label></li>
+    <li><label><input type="checkbox" data-id="auth-vpn"><span class="item-text">Re-import .ovpn profiles; sign in to PrivateVPN</span></label></li>
+    <li><label><input type="checkbox" data-id="auth-tableplus"><span class="item-text">TablePlus: license key + import connections</span></label></li>
+  </ul>
+
+  <h2>After install — verify &amp; finish <span class="count" data-count></span></h2>
+  <ul class="checklist" data-section>
+    <li><label><input type="checkbox" data-id="ver-node"><span class="item-text">Check <code>node -v</code> → v24.19.0<small>nvm default is pinned by installscript; <code>.nvmrc</code> repos auto-switch.</small></span></label></li>
+    <li><label><input type="checkbox" data-id="ver-iterm"><span class="item-text">iTerm2: confirm the "Dotfiles" profile is default (Maple Mono NF, ~/Code start dir)</span></label></li>
+    <li><label><input type="checkbox" data-id="ver-xcode"><span class="item-text">Xcode first-run: <code>sudo xcodebuild -license accept &amp;&amp; xcodebuild -runFirstLaunch</code>, then <code>xcode-select -s /Applications/Xcode.app</code></span></label></li>
+    <li><label><input type="checkbox" data-id="ver-rclone"><span class="item-text">Verify rclone: <code>rclone lsd r2:</code> lists the backup bucket</span></label></li>
+    <li><label><input type="checkbox" data-id="ver-puff"><span class="item-text">Build the puff CLI: <code>cd ~/Code/github/puffrate.com/cli &amp;&amp; npm i &amp;&amp; npm run build &amp;&amp; npm link</code></span></label></li>
+    <li><label><input type="checkbox" data-id="ver-ext"><span class="item-text">Install editor extensions in VS Code and Cursor<small>Settings/keybindings are shared from <code>vscode/</code>; extensions are per-app.</small></span></label></li>
+    <li><label><input type="checkbox" data-id="ver-resolve"><span class="item-text">Manual installs: DaVinci Resolve (blackmagicdesign.com) and ProcXray (procxray.com)<small>Neither has a brew cask.</small></span></label></li>
+    <li><label><input type="checkbox" data-id="ver-zshrc"><span class="item-text">Update <code>ssh-add</code> lines in <code>shell/.zshrc</code> if key filenames changed</span></label></li>
+  </ul>
+
+  <footer>State lives in this browser's localStorage under <code>dotfiles-setup-checklist-v1</code>. "Reset checklist" asks twice, then clears it.</footer>
+</main>
+
+<script>
+(function () {
+  var KEY = 'dotfiles-setup-checklist-v1';
+  var boxes = Array.prototype.slice.call(document.querySelectorAll('input[type="checkbox"][data-id]'));
+  var progressText = document.getElementById('progressText');
+  var progressFill = document.getElementById('progressFill');
+  var resetBtn = document.getElementById('resetBtn');
+
+  function load() {
+    try { return JSON.parse(localStorage.getItem(KEY)) || {}; }
+    catch (e) { return {}; }
+  }
+  function save(state) {
+    try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {}
+  }
+
+  function render() {
+    var state = load();
+    var done = 0;
+    boxes.forEach(function (box) {
+      var checked = !!state[box.dataset.id];
+      box.checked = checked;
+      box.closest('li').classList.toggle('checked', checked);
+      if (checked) done++;
+    });
+    progressText.textContent = done + ' / ' + boxes.length;
+    progressFill.style.width = (boxes.length ? (done / boxes.length) * 100 : 0) + '%';
+
+    document.querySelectorAll('ul[data-section]').forEach(function (ul) {
+      var sBoxes = ul.querySelectorAll('input[type="checkbox"]');
+      var sDone = ul.querySelectorAll('li.checked').length;
+      var count = ul.previousElementSibling.querySelector('[data-count]');
+      count.textContent = sDone + '/' + sBoxes.length;
+      count.classList.toggle('done', sDone === sBoxes.length && sBoxes.length > 0);
+    });
+  }
+
+  boxes.forEach(function (box) {
+    box.addEventListener('change', function () {
+      var state = load();
+      if (box.checked) state[box.dataset.id] = true;
+      else delete state[box.dataset.id];
+      save(state);
+      render();
+    });
+  });
+
+  // two-click reset: first click arms, second click clears; disarms after 3s
+  var confirming = false, timer = null;
+  resetBtn.addEventListener('click', function () {
+    if (!confirming) {
+      confirming = true;
+      resetBtn.classList.add('confirming');
+      resetBtn.textContent = 'Click again to clear';
+      timer = setTimeout(disarm, 3000);
+    } else {
+      clearTimeout(timer);
+      try { localStorage.removeItem(KEY); } catch (e) {}
+      disarm();
+      render();
+    }
+  });
+  function disarm() {
+    confirming = false;
+    resetBtn.classList.remove('confirming');
+    resetBtn.textContent = 'Reset checklist';
+  }
+
+  render();
+})();
+</script>
+</body>
+</html>

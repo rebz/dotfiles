@@ -57,6 +57,7 @@ alfred/                # Alfred preferences snapshot (Alfred syncs to this dir)
 vscode/                # shared settings/keybindings for VS Code AND Cursor
 rclone/                # rclone.conf.example; real conf is gitignored
 scripts/               # helper scripts (link-editor-settings.sh)
+setup-checklist.html   # interactive migration checklist (localStorage-backed)
 shell/
   .zshrc               # symlinked to ~/.zshrc
   .aliases             # git, navigation, network helpers
@@ -83,6 +84,8 @@ shell/
 - `claudey` — `claude --dangerously-skip-permissions`
 
 ## Post-install checklist (new machine)
+
+Interactive version: `open ~/.dotfiles/setup-checklist.html` — a self-contained page covering the full migration (before leaving the old Mac through final verification), with progress saved in the browser's localStorage and a reset button.
 
 - [ ] Generate/copy SSH keys, update the `ssh-add` lines at the top of `shell/.zshrc` to match the key filenames on this machine
 - [ ] `cp .env.example .env` and fill in secrets
