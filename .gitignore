@@ -4,3 +4,5 @@
 rclone/rclone.conf
 macbook-env-backup.zip
 macbook-env-backup.zip.bak
+macbook-env-backup/
+alfred/Alfred.alfredpreferences/preferences/local/
