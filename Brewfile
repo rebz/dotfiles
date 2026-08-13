@@ -4,6 +4,7 @@
 
 tap "ngrok/ngrok"
 tap "steipete/tap"
+tap "stripe/stripe-cli"
 
 #################################################################
 ### Core CLI
@@ -27,6 +28,7 @@ brew "gitleaks"    # scan commits for leaked secrets
 brew "ripgrep"     # fast gitignore-aware grep (rg) — also used by AI CLIs
 brew "lazydocker"  # TUI for the puffrate compose stack
 brew "dive"        # inspect Docker image layers/bloat
+brew "stripe/stripe-cli/stripe"  # Stripe CLI — webhook forwarding, API test calls
 
 #################################################################
 ### AI / Agentic CLIs

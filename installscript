@@ -65,6 +65,7 @@ echo 'install packages from Brewfile'
 echo '----------------'
 brew trust ngrok/ngrok 2>/dev/null || true
 brew trust steipete/tap 2>/dev/null || true
+brew trust stripe/stripe-cli 2>/dev/null || true
 # --verbose streams each install's real output (download progress bars)
 # instead of the silent one-line-per-package mode. mas items (Xcode etc.)
 # still print nothing while downloading — watch those in the App Store app.
