@@ -35,7 +35,7 @@ brew "stripe/stripe-cli/stripe"  # Stripe CLI — webhook forwarding, API test c
 #################################################################
 
 cask "codex"        # OpenAI Codex CLI
-brew "gemini-cli"   # Google Gemini (incl. Nano Banana image gen)
+cask "antigravity-cli"  # Google Antigravity CLI (binary: agy)
 cask "claude-code"  # Claude Code
 cask "codexbar"     # menu-bar agent usage monitor (M-series only)
 # Grok Build has no brew package — installed via npm in installscript

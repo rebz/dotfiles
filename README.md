@@ -33,7 +33,7 @@ Everything brew-managed is declared in the [`Brewfile`](Brewfile) — that file 
 
 **Core CLI:** bash 4+, wget, gh, git-delta, jq, tmux, yarn, pnpm, libpq (psql/pg_dump), rclone, doctl, cocoapods, shellcheck, gitleaks, ripgrep, lazydocker, dive
 
-**AI CLIs:** Claude Code, Codex, Gemini CLI (Nano Banana image gen lives inside Gemini), CodexBar; Grok Build via npm
+**AI CLIs:** Claude Code, Codex, Antigravity CLI (`agy`), CodexBar; Grok Build via npm
 
 **Apps (casks):** iTerm2, Docker Desktop, VS Code, Cursor, Alfred, Google Chrome, Firefox, Edge, TablePlus, Postman, Sketch, Spotify, Flux, Tailscale, PrivateVPN, OpenVPN Connect, ngrok, VLC, OBS, Blender, Creality Print, Creality Slicer, UltiMaker Cura
 
@@ -97,7 +97,7 @@ Interactive version: `open ~/.dotfiles/setup-checklist.html` — a self-containe
 - [ ] ProcXray (process explorer): manual download from [procxray.com](https://procxray.com/) (no brew cask or App Store listing)
 - [ ] Sign in to the App Store BEFORE running bootstrap (needed for `mas` installs: Bear, Fantastical)
 - [ ] Sign in: Tailscale, Spotify, VS Code sync, Docker Desktop
-- [ ] Auth the AI CLIs: `claude`, `codex`, `gemini`, `grok`
+- [ ] Auth the AI CLIs: `claude`, `codex`, `agy`, `grok`
 - [ ] `gh auth login` (required by `puff build`)
 - [ ] rclone remote config for puffrate R2 backups (`rclone config`)
 - [ ] puff CLI: `cd ~/Code/github/puffrate.com/cli && npm i && npm run build && npm link`
