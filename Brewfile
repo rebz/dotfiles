@@ -61,6 +61,7 @@ cask "tailscale-app"   # brew renamed the old "tailscale" cask
 # privatevpn cask disabled upstream 2026-01-07 — install manually from privatevpn.com
 cask "openvpn-connect"
 cask "ngrok"
+cask "logi-options+"   # Logi Options+ — MX Master 3 / MX Keys (reboot required)
 cask "vlc"
 cask "obs"
 cask "blender"
