@@ -12,6 +12,33 @@ defaults write com.apple.screencapture location -string "$HOME/Desktop"
 defaults write com.apple.screencapture type -string "png"
 
 ###############################################################################
+# Accessibility: Zoom                                                         #
+###############################################################################
+# com.apple.universalaccess is TCC-protected: these writes fail with
+# "Could not write domain" unless the terminal running this script has been
+# granted Full Disk Access. Failures are caught and reported below.
+
+zoom_ok=1
+
+# Use keyboard shortcuts to zoom (opt+cmd+8 / +/-)
+defaults write com.apple.universalaccess closeViewHotkeysEnabled -bool true 2>/dev/null || zoom_ok=0
+
+# Use trackpad gesture to zoom (double-tap three fingers)
+defaults write com.apple.universalaccess closeViewTrackpadGestureZoomEnabled -bool true 2>/dev/null || zoom_ok=0
+
+# Use scroll gesture with modifier keys to zoom (default modifier: control)
+defaults write com.apple.universalaccess closeViewScrollWheelToggle -bool true 2>/dev/null || zoom_ok=0
+
+if [ "$zoom_ok" -ne 1 ]; then
+  echo ''
+  echo '!!! Accessibility > Zoom settings were NOT applied.'
+  echo '    com.apple.universalaccess is TCC-protected. Grant Full Disk Access to'
+  echo '    the terminal running this script (System Settings > Privacy & Security'
+  echo '    > Full Disk Access), restart the terminal, then re-run this script.'
+  echo ''
+fi
+
+###############################################################################
 # Finder                                                                      #
 ###############################################################################
 

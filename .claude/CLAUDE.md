@@ -6,7 +6,7 @@ Personal macOS dotfiles. Cloned to `~/.dotfiles` on a new Mac and run **once** v
 
 - `bootstrap` — entry point; confirms, then sources `installscript`
 - `installscript` — one-shot provisioning: macOS defaults, Xcode CLT, git symlinks, oh-my-zsh, Homebrew, brew packages/casks, NVM
-- `osx/set-defaults.sh` — extra `pmset` defaults, run manually
+- `osx/set-defaults.sh` — macOS defaults (Finder, Dock, screenshots, Accessibility zoom); sourced by `installscript` after an FDA prompt, also runnable standalone
 - `shell/.zshrc`, `.aliases`, `.functions`, `.exports` — sourced in that order by `.zshrc`; `.zshrc`, `.gitconfig`, `.gitignore_global` are symlinked to `$HOME`
 - `.env` (git-ignored, from `.env.example`) — machine-local secrets, sourced by `.zshrc`
 - `~/.dotfiles-custom/shell/` — optional uncommitted per-machine overrides, sourced last

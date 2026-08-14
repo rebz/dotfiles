@@ -21,10 +21,15 @@ git clone git@github.com:rebz/dotfiles.git ~/.dotfiles
 8. Links `~/.config/rclone/rclone.conf` to the (gitignored) `rclone/rclone.conf` if present
 9. Installs NVM + Node 24.19.0 (system default), plus npm-only CLIs (Grok Build, Ionic)
 
-After it finishes, optionally run:
+10. Prompts for Full Disk Access, then sources `osx/set-defaults.sh` (macOS defaults)
+
+The Full Disk Access prompt matters: the Accessibility → Zoom defaults write to
+`com.apple.universalaccess`, a TCC-protected domain that refuses writes without it.
+The script says so loudly if they were refused. To re-run the defaults on their own:
 
 ```sh
-~/.dotfiles/osx/set-defaults.sh   # Finder/Dock/screenshot defaults
+~/.dotfiles/osx/set-defaults.sh
+defaults read com.apple.universalaccess | grep closeView   # verify zoom stuck
 ```
 
 ## What gets installed
@@ -51,7 +56,7 @@ The libpq/rclone/doctl/cocoapods/Docker picks exist to support puffrate.com's in
 bootstrap              # entry point — confirm, then run installscript
 installscript          # main provisioning script (brew bundle, zsh, node)
 Brewfile               # declarative package list (brew bundle)
-osx/set-defaults.sh    # macOS defaults (Finder, Dock, screenshots, Spotlight off ⌘Space)
+osx/set-defaults.sh    # macOS defaults (Finder, Dock, screenshots, Spotlight off ⌘Space, zoom)
 iterm2/                # iTerm2 dynamic profile (Maple Mono NF + theme)
 alfred/                # Alfred preferences snapshot (Alfred syncs to this dir)
 vscode/                # shared settings/keybindings for VS Code AND Cursor

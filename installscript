@@ -5,7 +5,8 @@
 # Hide "last login" line when starting a new terminal session
 touch $HOME/.hushlogin
 
-# macOS defaults (Finder, Dock, screenshots, power) live in osx/set-defaults.sh
+# macOS defaults (Finder, Dock, screenshots, accessibility zoom) live in
+# osx/set-defaults.sh, sourced near the end of this script
 
 
 
@@ -148,6 +149,21 @@ npm install -g @ionic/cli
 
 
 #################################################################
+### macOS defaults
+#################################################################
+
+# set-defaults.sh writes com.apple.universalaccess (Accessibility > Zoom),
+# which is TCC-protected — without Full Disk Access those writes are refused.
+echo 'set macOS defaults'
+echo '------------------'
+echo 'Grant Full Disk Access to this terminal now:'
+echo 'System Settings > Privacy & Security > Full Disk Access'
+read -p 'Press enter to continue...'
+source $HOME/.dotfiles/osx/set-defaults.sh
+
+
+
+#################################################################
 ### Done
 #################################################################
 
@@ -158,7 +174,8 @@ echo 'all done'
 echo '++++++++++++++++++++++++++++++'
 echo 'Some optional tidbits'
 
-echo '1. set some sensible os x defaults by running: $HOME/.dotfiles/osx/set-defaults.sh'
+echo '1. verify the Accessibility > Zoom defaults stuck (they need Full Disk Access):'
+echo '   defaults read com.apple.universalaccess | grep closeView'
 echo '2. make a .dotfiles-custom/shell/.(exports,aliases,functions,zshrc) for your personal commands'
 
 echo '++++++++++++++++++++++++++++++'
